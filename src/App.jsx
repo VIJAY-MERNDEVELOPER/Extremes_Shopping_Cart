@@ -8,21 +8,40 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
 import Products from "./pages/Products";
+import Product from "./pages/Product";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { useState } from "react";
 // import {} from "react-router";
 
 function App() {
+  const [isLoggedin, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState();
+
   return (
     <>
       <div
         className="App container-fixed "
         style={{ width: "100%", overflow: "hidden" }}
       >
-        <NavBar />
+        <NavBar setIsLoggedIn={setIsLoggedIn} isLoggedin={isLoggedin} />
 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/products:id" element={<Products />} />
+          <Route path="/product:id" element={<Product />} />
+          <Route path="/products" element={<Products />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                setIsLoggedIn={setIsLoggedIn}
+                isLoggedin={isLoggedin}
+                setUserName={setUserName}
+              />
+            }
+          />
+          <Route path="/register" element={<Register />} />
         </Routes>
         <Footer />
       </div>

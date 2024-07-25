@@ -37,4 +37,7 @@
   color: black;
   font-weight: 700;
   width: 100%;
+  @media (max-width: 375px) {
+    font-size: 16px;
+  }
 }

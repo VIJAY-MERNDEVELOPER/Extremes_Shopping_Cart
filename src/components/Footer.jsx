@@ -7,7 +7,13 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 
 function Footer() {
   return (
-    <div className="my-5">
+    <div
+      className="my-5"
+      style={{
+        borderTop: "1px solid rgba(238, 231, 231, 0.8)",
+        paddingTop: "10px",
+      }}
+    >
       <div
         className="row  align-items-center "
         style={{ width: "80%", marginLeft: "10%" }}

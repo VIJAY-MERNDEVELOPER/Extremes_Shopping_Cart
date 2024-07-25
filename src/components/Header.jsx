@@ -45,19 +45,9 @@ function Header() {
         </Stack>{" "}
       </Stack>{" "}
       <picture>
-        <source
-          media="(min-width: 1024px)"
-          srcSet="https://culture-kings.imgix.net/files/EXTENDED_TAXBACK_2024_JUL_site_hphero-desktop_2000x.jpg?v=1721352014&auto=compress,format"
-        />
-        <source
-          media="(min-width: 768px)"
-          srcSet="https://culture-kings.imgix.net/files/EXTENDED_TAXBACK_2024_JUL_site_hp_hero-mobile_800x.jpg?v=1721352015&auto=compress,format"
-        />
-        <img
-          src="https://culture-kings.imgix.net/files/EXTENDED_TAXBACK_2024_JUL_site_hp_hero-mobile_800x.jpg?v=1721352015&auto=compress,format"
-          alt=""
-          width={"100%"}
-        />
+        <source media="(min-width: 1024px)" srcSet="/image-1721903148001.jpg" />
+        <source media="(min-width: 768px)" srcSet="/image-1721903148001.jpg" />
+        <img src="/image-1721903148001.jpg" alt="" width={"100%"} />
       </picture>{" "}
     </>
   );

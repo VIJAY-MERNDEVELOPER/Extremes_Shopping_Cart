@@ -190,19 +190,8 @@ function Home() {
         >
           NOW TRENDING
         </Divider>
-        <div
-          className="row justify-content-center my-3  "
-          style={{ height: "70vh" }}
-        >
-          <div
-            className="d-flex category-scroll "
-            style={{
-              overflow: "auto",
-              width: "100%",
-              height: "70vh",
-              scrollbarWidth: "none",
-            }}
-          >
+        <div className="row justify-content-center my-3  " style={{}}>
+          <div className="d-flex category-scroll  video-card">
             {" "}
             {instaVideos?.map((videos, idx) => {
               return <VideoCard key={idx} videoData={videos} />;

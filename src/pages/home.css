@@ -37,13 +37,23 @@
 }
 
 .category-scroll {
-  overflow: "auto";
+  overflow: auto;
   overflow-x: hidden;
   padding-left: 0;
   /* margin-left: 0; */
 
   /* scrollbar-width: none; */
   /* background-color: rgb(255, 255, 255); */
+}
+
+.video-card {
+  overflow: auto;
+  width: 100%;
+  height: 60vh;
+  scrollbar-width: none;
+  @media (max-width: 1440px) {
+    height: 70vh;
+  }
 }
 
 @media (max-width: 400px) {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -17,6 +18,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Drawer, Grid } from "@mui/material";
 import SideBar from "./SideBar";
 import axios from "axios";
+import { Link, NavLink } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,7 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function NavBar() {
+function NavBar({ setIsLoggedIn, isLoggedIn }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [open, setOpen] = useState(false);
@@ -234,9 +236,11 @@ function NavBar() {
               color="inherit"
               className="nav-icon"
             >
-              <Badge badgeContent={cart.length} color="error">
-                <ShoppingCartIcon />
-              </Badge>
+              <Link to={"/cart"}>
+                <Badge badgeContent={cart.length} color="error">
+                  <ShoppingCartIcon style={{ color: "rgb(255,255,255)" }} />
+                </Badge>
+              </Link>
             </IconButton>{" "}
             <IconButton
               size="large"
@@ -249,11 +253,18 @@ function NavBar() {
               className="nav-icon"
             >
               <AccountCircle />
-              <Typography sx={{ display: { xs: "none", sm: "block" } }}>
-                Login
-              </Typography>
             </IconButton>{" "}
-          </Box>
+          </Box>{" "}
+          <Typography
+            sx={{ display: { xs: "none", sm: "block", marginLeft: "10px" } }}
+          >
+            <NavLink
+              to={"/login"}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              {isLoggedIn === true ? "Logged In" : "Login"}
+            </NavLink>
+          </Typography>
         </Toolbar>
       </AppBar>
       {/* {renderMobileMenu} */}

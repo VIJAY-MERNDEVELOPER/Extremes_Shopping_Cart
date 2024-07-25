@@ -25,6 +25,8 @@
 }
 
 .add-to-cart-btn {
+  text-decoration: none;
+  text-align: center;
   width: 80%;
   border: none;
   font-size: 0.9rem;
@@ -33,4 +35,9 @@
   padding: 5px;
   color: white;
   background-color: rgb(255, 0, 0);
+}
+
+.card-link {
+  text-decoration: none;
+  color: #000;
 }
