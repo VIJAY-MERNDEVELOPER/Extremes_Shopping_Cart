@@ -207,27 +207,6 @@ function NavBar({ setIsLoggedIn, isLoggedIn }) {
           <Grid className="logo ">
             <img src="/extremes-logo.png" width="205px" />
           </Grid>{" "}
-          <Search sx={{ display: { xs: "none", md: "flex" } }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>{" "}
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              color="inherit"
-              className="nav-icon"
-            >
-              <SearchIcon />
-            </IconButton>
-          </Box>
           <Box sx={{ display: { xs: "flex" } }}>
             {" "}
             <IconButton
