@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 5px;
+  margin: 5px;
+}
+
+.wishlist-icon {
+  border-radius: 50%;
+  padding: 5px;
+  width: 35px;
+  border: none;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+
+  /* font-weight: 600; */
+  /* width: 40px; */
+  position: relative;
+  left: 82%;
+  top: 5px;
+}
+
+.add-to-cart-btn {
+  width: 80%;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 5px;
+  color: white;
+  background-color: rgb(255, 0, 0);
+}

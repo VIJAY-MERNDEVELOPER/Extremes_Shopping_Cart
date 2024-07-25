@@ -1,0 +1,9 @@
+.arrow-direction {
+  width: "5%";
+  display: flex;
+  /* justify-content: space-evenly; */
+  gap: 10px;
+  @media (max-width: 760px) {
+    display: none;
+  }
+}

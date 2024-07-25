@@ -1,0 +1,26 @@
+.instagram-icon {
+  border-radius: 5px;
+  color: #fff;
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+}
+
+.facebook-icon {
+  color: #3b5998;
+}
+
+.youtube-icon {
+  color: rgb(255, 0, 0);
+}
+
+@media (max-width: 700px) {
+  .footer-section {
+    display: none;
+  }
+}
