@@ -203,7 +203,7 @@ function NavBar() {
             </Typography>{" "}
           </Grid>
           <Grid className="logo ">
-            <img src="src/assets/extremes-logo.png" width="205px" />
+            <img src="/extremes-logo.png" width="205px" />
           </Grid>{" "}
           <Search sx={{ display: { xs: "none", md: "flex" } }}>
             <SearchIconWrapper>
