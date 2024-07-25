@@ -14,7 +14,7 @@ function Footer() {
       >
         <div className="col-sm-12 col-md-5" style={{ margin: 0 }}>
           {" "}
-          <img src="../src/assets/extremes-logo.png" width="175px" />
+          <img src="/extremes-logo.png" width="175px" />
         </div>
         <div className="col-6 footer-section">
           <div className="row">
