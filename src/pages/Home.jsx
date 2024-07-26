@@ -190,7 +190,7 @@ function Home() {
         >
           NOW TRENDING
         </Divider>
-        <div className="row justify-content-center my-3  " style={{}}>
+        <div className="row justify-content-center my-3  " >
           <div className="d-flex category-scroll  video-card">
             {" "}
             {instaVideos?.map((videos, idx) => {

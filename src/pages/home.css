@@ -49,7 +49,7 @@
 .video-card {
   overflow: auto;
   width: 100%;
-  height: 60vh;
+  height: 62vh;
   scrollbar-width: none;
   @media (max-width: 1440px) {
     height: 70vh;
