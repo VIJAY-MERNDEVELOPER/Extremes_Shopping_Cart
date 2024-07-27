@@ -12,7 +12,7 @@ function ProductCard({ product }) {
     <Card
       sx={{
         maxWidth: 250,
-        maxHeight: 410,
+        maxHeight: 450,
         padding: 0,
         // border: 0,
         margin: 0,

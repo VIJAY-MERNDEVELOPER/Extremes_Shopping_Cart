@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
-import Card from "@mui/material/Card";
-
-import { Stack } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import DividerComponent from "./DividerComponent";
-import { useEffect, useRef, useState } from "react";
+import ProductCard from "./ProductCard";
 
-function LatestReleaseCard({ latest }) {
+function LatestReleasesProducts({ products }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const containerRef = useRef(null);
@@ -53,48 +51,31 @@ function LatestReleaseCard({ latest }) {
     <>
       {" "}
       <DividerComponent
-        isAtEnd={isAtEnd}
         content={"LATEST RELEASES"}
         handleScroll={handleScroll}
         scrollPosition={scrollPosition}
+        isAtEnd={isAtEnd}
       />
-      <div className="row justify-content-center flex-nowrap my-3  ">
+      <div className="row justify-content-center flex-nowrap my-3 ">
         <div
           ref={containerRef}
-          className="d-flex gap-2 latest-container"
+          className="d-flex gap-3  product-container"
           style={{
             overflow: "auto",
             width: "100%",
+            scrollbarWidth: "none",
             marginLeft: 0,
             paddingLeft: 0,
-            scrollbarWidth: "none",
           }}
         >
           {" "}
-          {latest?.map((latest, idx) => {
+          {products?.map((product, idx) => {
             return (
-              <div className="col-12 col-md-4 col-lg-3 " key={idx}>
-                <Card
-                  sx={{
-                    maxWidth: 450,
-                    border: "0 none",
-                    boxShadow: "none",
-                    margin: 0,
-                    padding: 0,
-                  }}
-                  className="card"
-                >
-                  <Stack justifyContent={"center"}>
-                    {" "}
-                    <img
-                      src={latest.latest_banner}
-                      alt={latest.latest_name}
-                      width={"100%"}
-                      className="card-img"
-                    />
-                  </Stack>
-                </Card>{" "}
-                {/* <LatestReleaseCard latest={latest} />{" "} */}
+              <div
+                className="col-8 col-sm-3  col-md-4 col-lg-3 col-xl-3 col-xxl-2  "
+                key={idx}
+              >
+                <ProductCard key={idx} product={product} />
               </div>
             );
           })}
@@ -104,4 +85,4 @@ function LatestReleaseCard({ latest }) {
   );
 }
 
-export default LatestReleaseCard;
+export default LatestReleasesProducts;

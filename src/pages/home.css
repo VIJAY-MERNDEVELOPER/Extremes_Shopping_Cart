@@ -36,17 +36,13 @@
   }
 }
 
-.category-scroll {
-  overflow: auto;
-  overflow-x: hidden;
-  padding-left: 0;
-  /* margin-left: 0; */
-
-  /* scrollbar-width: none; */
-  /* background-color: rgb(255, 255, 255); */
+.product-container .video-container .category-container .latest-container {
+  overflow: auto !important;
+  overflow-x: scroll !important;
+  padding-left: 0px !important;
 }
 
-.video-card {
+.video-container {
   overflow: auto;
   width: 100%;
   height: 62vh;

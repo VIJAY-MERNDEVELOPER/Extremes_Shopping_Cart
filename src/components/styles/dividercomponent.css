@@ -1,9 +1,16 @@
 .arrow-direction {
-  width: "5%";
+  width: "4%";
   display: flex;
   /* justify-content: space-evenly; */
-  gap: 10px;
-  @media (max-width: 760px) {
+  gap: 0px;
+  align-items: center;
+  @media (max-width: 769px) {
     display: none;
   }
+}
+
+.arrow-btn {
+  padding: 0;
+  border: none;
+  background: none;
 }

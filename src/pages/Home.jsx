@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
-import "./home.css";
+
 import DividerComponent from "../components/DividerComponent";
 import LatestReleaseCard from "../components/LatestReleaseCard";
-import { Box, Card, Divider, ListItemButton, Typography } from "@mui/material";
-import AspectRatio from "@mui/joy/AspectRatio";
-import ListItemContent from "@mui/joy/ListItemContent";
+import { Divider } from "@mui/material";
+
 import VideoCard from "../components/VideoCard";
+import "./home.css";
+import LatestReleasesContainer from "../components/LatestReleasesProducts";
+import LatestReleasesProducts from "../components/LatestReleasesProducts";
+import CategoryContainer from "../components/CategoryContainer";
+import TrendinVideoContainer from "../components/TrendinVideoContainer";
 
 function Home() {
   const [products, setProducts] = useState();
@@ -89,28 +93,11 @@ function Home() {
     <div className="home-container">
       <Header />
       <div className="row justify-content-center main-layout">
-        <DividerComponent content={"LATEST RELEASES"} />
-        <div className="row justify-content-center flex-nowrap my-3 category-section ">
-          <div
-            className="d-flex gap-2 category-scroll"
-            style={{
-              overflow: "auto",
-              width: "100%",
-              marginLeft: 0,
-              scrollbarWidth: "none",
-            }}
-          >
-            {" "}
-            {latest?.map((latest, idx) => {
-              return (
-                <div className="col-12 col-md-4 col-lg-3 " key={idx}>
-                  {" "}
-                  <LatestReleaseCard latest={latest} />{" "}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {/* Latest Rellease section */}
+
+        <LatestReleaseCard latest={latest} />
+
+        {/* Banner intermediate */}
         <picture className="d-flex justify-content-center my-5  banner-container">
           <source
             media="(min-width: 1024px)"
@@ -129,75 +116,19 @@ function Home() {
             className=" banner"
           />
         </picture>
-        <DividerComponent content={"LATEST RELEASES"} />
-        <div className="row justify-content-center flex-nowrap my-3 ">
-          <div
-            className="d-flex gap-3 category-scroll"
-            style={{
-              overflow: "auto",
-              width: "100%",
-              scrollbarWidth: "none",
-              marginLeft: 0,
-            }}
-          >
-            {" "}
-            {products?.map((product, idx) => {
-              return (
-                <div
-                  className="col-8 col-sm-3  col-md-4 col-lg-3 col-xl-3 col-xxl-2  "
-                  key={idx}
-                >
-                  <ProductCard key={idx} product={product} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <DividerComponent content={"SHOP BY CATEGORY"} />{" "}
-        <div
-          className="row justify-content-center flex-wrap my-3 "
-          style={{ padding: 0 }}
-        >
-          <div
-            className="d-flex gap-2 justify-content-between flex-wrap"
-            style={{
-              overflow: "auto",
-              width: "100%",
-              scrollbarWidth: "none",
-              marginLeft: 0,
-            }}
-          >
-            {" "}
-            {categories?.map((category, idx) => {
-              return (
-                <div key={idx} className="category-card">
-                  <img src={category.category_banner} alt="" width={"100%"} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {/* Latest Releases Products section*/}
+        <LatestReleasesProducts products={products} />
+
+        {/* Category card section */}
+
+        <CategoryContainer categories={categories} />
+
+        {/* Shop New Releases Button */}
         <div className="row justify-content-center mt-5 mb-3">
           <button className="shop-new-releases-btn">SHOP NEW RELEASES</button>
         </div>
-        <Divider
-          sx={{
-            width: "100%",
-            fontSize: "23px",
-            fontWeight: "bolder",
-            color: "rgb(255,0,0)",
-          }}
-        >
-          NOW TRENDING
-        </Divider>
-        <div className="row justify-content-center my-3  " >
-          <div className="d-flex category-scroll  video-card">
-            {" "}
-            {instaVideos?.map((videos, idx) => {
-              return <VideoCard key={idx} videoData={videos} />;
-            })}
-          </div>
-        </div>
+        {/* Trending Videos section */}
+        <TrendinVideoContainer instaVideos={instaVideos} />
       </div>
     </div>
   );
