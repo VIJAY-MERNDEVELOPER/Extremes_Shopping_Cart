@@ -1,94 +1,96 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
-import ProductCard from "../components/ProductCard";
-
-import DividerComponent from "../components/DividerComponent";
 import LatestReleaseCard from "../components/LatestReleaseCard";
-import { Divider } from "@mui/material";
-
-import VideoCard from "../components/VideoCard";
 import "./home.css";
-import LatestReleasesContainer from "../components/LatestReleasesProducts";
 import LatestReleasesProducts from "../components/LatestReleasesProducts";
 import CategoryContainer from "../components/CategoryContainer";
 import TrendinVideoContainer from "../components/TrendinVideoContainer";
+import { CircularProgress } from "@mui/material";
+import {
+  fetchCategory,
+  fetchLatestRelease,
+  fetchProductData,
+  fetchVideos,
+} from "../api/apiFetch";
 
-function Home() {
-  const [products, setProducts] = useState();
+function Home({ products, setProducts }) {
+  // const [products, setProducts] = useState();
   const [latest, setLatest] = useState();
   const [categories, setCategories] = useState();
   const [instaVideos, setInstaVideos] = useState();
 
-  const fetchProductData = async () => {
-    try {
-      const res = await axios.get("/products", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.status === 200) {
-        await setProducts(res.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchProductData = async () => {
+  //   try {
+  //     const res = await axios.get("/products", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     if (res.status === 200) {
+  //       await setProducts(res.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const fetchLatestRelease = async () => {
-    try {
-      const res = await axios.get("/latest_releases", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.status === 200) {
-        setLatest(res.data);
-        console.log(latest);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchLatestRelease = async () => {
+  //   try {
+  //     const res = await axios.get("/latest_releases", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     if (res.status === 200) {
+  //       setLatest(res.data);
+  //       console.log(latest);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const fetchVideos = async () => {
-    try {
-      const res = await axios.get("/insta_videos", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.status === 200) {
-        setInstaVideos(res.data);
-        console.log(instaVideos);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchVideos = async () => {
+  //   try {
+  //     const res = await axios.get("/insta_videos", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     if (res.status === 200) {
+  //       setInstaVideos(res.data);
+  //       console.log(instaVideos);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const fetchCategory = async () => {
-    try {
-      const res = await axios.get("/categories", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (res.status === 200) {
-        setCategories(res.data);
-        console.log(categories);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchCategory = async () => {
+  //   try {
+  //     const res = await axios.get("/categories", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     if (res.status === 200) {
+  //       setCategories(res.data);
+  //       console.log(categories);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchProductData();
-    fetchLatestRelease();
-    fetchVideos();
-    fetchCategory();
+    fetchProductData(setProducts);
+    fetchLatestRelease(setLatest);
+    fetchVideos(setInstaVideos);
+    fetchCategory(setCategories);
   }, []);
+
   return (
     <div className="home-container">
       <Header />
@@ -117,7 +119,11 @@ function Home() {
           />
         </picture>
         {/* Latest Releases Products section*/}
-        <LatestReleasesProducts products={products} />
+        {products ? (
+          <LatestReleasesProducts products={products} />
+        ) : (
+          <CircularProgress color="inherit" />
+        )}
 
         {/* Category card section */}
 

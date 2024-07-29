@@ -5,7 +5,13 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import "./styles/dividercomponent.css";
 
-function DividerComponent({ content, handleScroll, scrollPosition, isAtEnd }) {
+function DividerComponent({
+  content,
+  handleScroll,
+  scrollPosition,
+  isAtEnd,
+  clientWidth,
+}) {
   return (
     <Stack
       alignItems={"center"}
@@ -30,7 +36,7 @@ function DividerComponent({ content, handleScroll, scrollPosition, isAtEnd }) {
           disabled={scrollPosition === 0}
           type="button"
           className="arrow-btn left-btn"
-          onClick={() => handleScroll(-315 * 4)}
+          onClick={() => handleScroll(-(clientWidth || 315 * 4))}
         >
           {" "}
           <KeyboardArrowLeftIcon sx={{ fontSize: 40 }} />{" "}
@@ -39,7 +45,7 @@ function DividerComponent({ content, handleScroll, scrollPosition, isAtEnd }) {
           disabled={isAtEnd}
           type="button"
           className="arrow-btn right-btn"
-          onClick={() => handleScroll(315 * 4)}
+          onClick={() => handleScroll(clientWidth || 315 * 4)}
           style={{ border: "none", background: "none" }}
         >
           {" "}

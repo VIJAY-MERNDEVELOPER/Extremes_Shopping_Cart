@@ -12,11 +12,12 @@ import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useState } from "react";
+import ForgetPassword from "./pages/ForgetPassword";
 // import {} from "react-router";
 
 function App() {
-  const [isLoggedin, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState();
+  const [cart, setCart] = useState({});
+  const [products, setProducts] = useState();
 
   return (
     <>
@@ -24,24 +25,22 @@ function App() {
         className="App container-fixed "
         style={{ width: "100%", overflow: "hidden" }}
       >
-        <NavBar setIsLoggedIn={setIsLoggedIn} isLoggedin={isLoggedin} />
+        <NavBar cart={cart} setCart={setCart} setProducts={setProducts} />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/"
+            element={<Home products={products} setProducts={setProducts} />}
+          />
+          <Route
+            path="/cart"
+            element={<Cart cart={cart} setCart={setCart} products={products} />}
+          />
           <Route path="/product:id" element={<Product />} />
           <Route path="/products" element={<Products />} />
-          <Route
-            path="/login"
-            element={
-              <Login
-                setIsLoggedIn={setIsLoggedIn}
-                isLoggedin={isLoggedin}
-                setUserName={setUserName}
-              />
-            }
-          />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgetpassword" element={<ForgetPassword />} />
         </Routes>
         <Footer />
       </div>

@@ -1,0 +1,23 @@
+.login-wrapper {
+  width: 80%;
+  height: 50vh;
+
+  @media (max-width: 769px) {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100vw;
+    height: 100%;
+  }
+}
+.form-container {
+  background-color: rgb(255, 0, 0);
+  height: 100%;
+  color: white;
+  padding: 20px 10px 0 10px;
+  @media (max-width: 426px) {
+    width: 100% !important;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}

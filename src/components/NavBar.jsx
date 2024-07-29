@@ -19,10 +19,9 @@ import { Drawer, Grid } from "@mui/material";
 import SideBar from "./SideBar";
 import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
+import { fetchCart } from "../api/apiFetch";
 
-
-
-function NavBar({ setIsLoggedIn, isLoggedIn }) {
+function NavBar({ cart, setCart }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [open, setOpen] = useState(false);
@@ -40,22 +39,22 @@ function NavBar({ setIsLoggedIn, isLoggedIn }) {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-  const [cart, setCart] = useState(0);
-  const fetchCart = async () => {
-    try {
-      const res = await axios.get("/cart", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  // const [cart, setCart] = useState(0);
+  // const fetchCart = async (setCart) => {
+  //   try {
+  //     const res = await axios.get("/cart", {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
 
-      if (res.status === 200) {
-        setCart(res.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     if (res.status === 200) {
+  //       setCart(res.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -79,60 +78,8 @@ function NavBar({ setIsLoggedIn, isLoggedIn }) {
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  //   const renderMobileMenu = (
-  //     <Menu
-  //       anchorEl={mobileMoreAnchorEl}
-  //       anchorOrigin={{
-  //         vertical: "top",
-  //         horizontal: "right",
-  //       }}
-  //       id={mobileMenuId}
-  //       keepMounted
-  //       transformOrigin={{
-  //         vertical: "top",
-  //         horizontal: "right",
-  //       }}
-  //       open={isMobileMenuOpen}
-  //       onClose={handleMobileMenuClose}
-  //     >
-  //       <MenuItem>
-  //         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-  //           <Badge badgeContent={4} color="error">
-  //             <MailIcon />
-  //           </Badge>
-  //         </IconButton>
-  //         <p>Messages</p>
-  //       </MenuItem>
-  //       <MenuItem>
-  //         <IconButton
-  //           size="large"
-  //           aria-label="show 17 new notifications"
-  //           color="inherit"
-  //         >
-  //           <Badge badgeContent={17} color="error">
-  //             <NotificationsIcon />
-  //           </Badge>
-  //         </IconButton>
-  //         <p>Notifications</p>
-  //       </MenuItem>
-  //       <MenuItem onClick={handleProfileMenuOpen}>
-  //         <IconButton
-  //           size="large"
-  //           aria-label="account of current user"
-  //           aria-controls="primary-search-account-menu"
-  //           aria-haspopup="true"
-  //           color="inherit"
-  //         >
-  //           <AccountCircle />
-  //         </IconButton>
-  //         <p>Profile</p>
-  //       </MenuItem>
-  //     </Menu>
-  //   );
-
   useEffect(() => {
-    fetchCart();
+    fetchCart(setCart);
   }, []);
   return (
     <Box sx={{ flexGrow: 1 }} className="nav-container">
@@ -165,7 +112,9 @@ function NavBar({ setIsLoggedIn, isLoggedIn }) {
             </Typography>{" "}
           </Grid>
           <Grid className="logo ">
-            <img src="/extremes-logo.png" width="205px" />
+            <Link to={"/"}>
+              <img src="/extremes-logo.png" width="205px" />
+            </Link>
           </Grid>{" "}
           <Box sx={{ display: { xs: "flex" } }}>
             {" "}
@@ -201,7 +150,7 @@ function NavBar({ setIsLoggedIn, isLoggedIn }) {
               to={"/login"}
               style={{ textDecoration: "none", color: "white" }}
             >
-              {isLoggedIn === true ? "Logged In" : "Login"}
+              Login
             </NavLink>
           </Typography>
         </Toolbar>

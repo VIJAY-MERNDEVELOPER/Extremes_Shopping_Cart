@@ -8,6 +8,9 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import "./styles/ProductCard.css";
 
 function ProductCard({ product }) {
+
+
+  
   return (
     <Card
       sx={{

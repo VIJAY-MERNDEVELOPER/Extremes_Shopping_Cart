@@ -8,7 +8,8 @@ import { useEffect, useRef, useState } from "react";
 function LatestReleaseCard({ latest }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isAtEnd, setIsAtEnd] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef();
+
   const handleScroll = (scrollAmount) => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
@@ -38,7 +39,8 @@ function LatestReleaseCard({ latest }) {
     const handleScroll = () => {
       const { scrollLeft, scrollWidth, clientWidth } = container;
       setScrollPosition(scrollLeft);
-      setIsAtEnd(Math.round(scrollLeft + clientWidth) === scrollWidth);
+      const endWidth = Math.round(scrollLeft + clientWidth);
+      setIsAtEnd(endWidth === scrollWidth || endWidth + 1 === scrollWidth);
       console.log("left+width", Math.round(scrollLeft + clientWidth));
       console.log("scrollwidth", scrollWidth);
     };

@@ -7,6 +7,7 @@ function LatestReleasesProducts({ products }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const containerRef = useRef(null);
+
   const handleScroll = (scrollAmount) => {
     if (containerRef.current) {
       containerRef.current.scrollBy({
