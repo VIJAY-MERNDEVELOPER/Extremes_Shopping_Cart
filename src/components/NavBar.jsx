@@ -139,12 +139,20 @@ function NavBar({ cart, setCart }) {
               onClick={handleProfileMenuOpen}
               color="inherit"
               className="nav-icon"
+              sx={{ display: { fontSize: "1.17em" } }}
             >
               <AccountCircle />
             </IconButton>{" "}
           </Box>{" "}
           <Typography
-            sx={{ display: { xs: "none", sm: "block", marginLeft: "10px" } }}
+            sx={{
+              display: {
+                xs: "none",
+                sm: "block",
+                marginLeft: "10px",
+                fontSize: "1.17em",
+              },
+            }}
           >
             <NavLink
               to={"/login"}
