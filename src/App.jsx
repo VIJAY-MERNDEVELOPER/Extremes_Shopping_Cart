@@ -16,17 +16,15 @@ import ForgetPassword from "./pages/ForgetPassword";
 // import {} from "react-router";
 
 function App() {
-  const [cart, setCart] = useState({});
-  const [products, setProducts] = useState();
+  const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);
 
   return (
-    <>
-      <div
-        className="App container-fixed "
-        style={{ width: "100%", overflow: "hidden" }}
-      >
+    <div className="row justify-content-center gap-2">
+      <div className="App container-fixed ">
         <NavBar cart={cart} setCart={setCart} setProducts={setProducts} />
-
+      </div>
+      <div className="main-content">
         <Routes>
           <Route
             path="/"
@@ -42,9 +40,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
         </Routes>
+      </div>
+      <div className="footer">
         <Footer />
       </div>
-    </>
+    </div>
   );
 }
 

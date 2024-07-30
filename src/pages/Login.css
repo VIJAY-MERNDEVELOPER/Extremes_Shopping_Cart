@@ -1,6 +1,6 @@
 .login-wrapper {
-  width: 80%;
-  height: 50vh;
+  width: 50%;
+  height: 100%;
 
   @media (max-width: 769px) {
     margin-left: 0;
@@ -9,11 +9,13 @@
     height: 100%;
   }
 }
-.form-container {
-  background-color: rgb(255, 0, 0);
+.login-form-container {
+  background-color: rgba(239, 240, 234, 0.973);
   height: 100%;
-  color: white;
+  /* color: red; */
   padding: 20px 10px 0 10px;
+  border: 1px solid rgba(221, 223, 214, 0.809);
+  font-weight: 600;
   @media (max-width: 426px) {
     width: 100% !important;
     margin-left: 0;

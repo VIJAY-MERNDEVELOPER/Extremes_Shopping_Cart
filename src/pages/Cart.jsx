@@ -2,122 +2,135 @@
 import React, { useEffect } from "react";
 import CartItem from "../components/CartItem";
 import { fetchCart, fetchProductData } from "../api/apiFetch";
-
-const component = `   <div className="container my-5">
-      <h3 className="d-flex  justify-content-center ">Your Shopping Cart</h3>
-      <div className="row">
-        <div
-          className="col-9"
-          style={{
-            border: "1px solid rgba(210,210,210,0.6)",
-            paddingTop: 10,
-          }}
-        >
-          {cart?.map((cart, idx) => {
-            return (
-              <CartItem
-                key={idx}
-                cart={cart}
-                products={products}
-                setCart={setCart}
-              />
-            );
-          })}
-          <p className="text-end">
-            <b>SubTotal(4 items) :</b> ₹ 2550
-          </p>
-        </div>{" "}
-        <div
-          className="col-3 "
-          style={{ border: "1px solid rgba(210,210,210,0.6)" }}
-        >
-          <div className="row justify-content-center">
-            <p className="text-center">
-              <b>SubTotal(4 items) :</b> ₹ 2550
-            </p>
-            <button
-              className="btn btn-warning w-50"
-              style={{ borderRadius: 10 }}
-            >
-              Proceed To Buy
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-`;
+import { Divider } from "@mui/material";
 
 function Cart({ cart, setCart, products, setProducts }) {
   useEffect(() => {
-    // fetchCart(setCart);
-    // fetchProductData(setProducts);
     const handleReload = () => {
       fetchCart(setCart);
+      console.log(cart);
       fetchProductData(setProducts);
+      console.log(products);
     };
-
-    return () => {
-      fetchCart(setCart);
-      fetchProductData(setProducts);
-    };
+    handleReload();
   }, []);
   return (
-    <>
-      {!cart && !products ? (
-        <span>...Loading</span>
+    <div className="container my-5">
+      <h3
+        className="d-flex  justify-content-center "
+        style={{ color: "rgb(255,0,0)" }}
+      >
+        Your Shopping Cart
+      </h3>{" "}
+      {!products ? (
+        <span className="d-flex justify-content-center">... cart Loading</span>
       ) : (
-        <div className="container my-5">
-          <h3
-            className="d-flex  justify-content-center "
-            style={{ color: "rgb(255,0,0 )" }}
+        <div className="row">
+          <div
+            className="col-8"
+            style={{
+              border: "1px solid rgba(210,210,210,0.6)",
+              paddingTop: 10,
+            }}
           >
-            Your Shopping Cart
-          </h3>
-          <div className="row">
-            <div
-              className="col-8"
-              style={{
-                border: "1px solid rgba(210,210,210,0.6)",
-                paddingTop: 10,
-              }}
-            >
-              {cart?.map((cart, idx) => {
-                return (
+            {cart?.map((cart, idx) => {
+              return (
+                <>
                   <CartItem
                     key={idx}
                     cart={cart}
                     products={products}
                     setCart={setCart}
+                    setProducts={setProducts}
                   />
-                );
-              })}
-              <p className="text-end">
-                <b>SubTotal(4 items) :</b> ₹ 2550
-              </p>
-            </div>{" "}
-            <div className="col-3 mx-3">
+                  <hr />
+                </>
+              );
+            })}
+
+            <p className="text-end">
+              <b>SubTotal(4 items) :</b> ₹ 2550
+            </p>
+          </div>{" "}
+          <div
+            className="col-3 mx-3"
+            style={{ position: "fixed", left: "60%", top: "10vh" }}
+          >
+            <div
+              className="row  "
+              style={{
+                border: "1px solid rgba(210,210,210,0.6)",
+                width: "100%",
+              }}
+            >
               <div
-                className="row justify-content-center align-items-start"
+                className="col-12"
                 style={{
-                  border: "1px solid rgba(210,210,210,0.6)",
-                  padding: "50px 10px",
+                  borderBottom: "1px solid rgba(210,210,210,0.6)",
                 }}
               >
-                <p className="text-center">
-                  <b>SubTotal(4 items) :</b> ₹ 2550
-                </p>
-                <button
-                  className="btn btn-warning w-50"
-                  style={{ borderRadius: 10 }}
-                >
-                  Proceed To Buy
-                </button>
+                {" "}
+                <h6 style={{ fontWeight: "bolder", opacity: 0.5 }}>
+                  PRICE DETAILS
+                </h6>
+              </div>{" "}
+              <div className="row gap-2">
+                <div className="row">
+                  <div className="col-8">
+                    <span>Price (12 items)</span>
+                  </div>
+                  <div className="col-4 text-end">
+                    <span>₹ 2000</span>
+                  </div>
+                </div>
+                <div className="row">
+                  {" "}
+                  <div className="col-8">
+                    <span>Discount</span>
+                  </div>
+                  <div className="col-4 text-end">
+                    <span> -₹2000</span>
+                  </div>
+                </div>
+                <div className="row">
+                  {" "}
+                  <div className="col-8 ">
+                    <span>Delivery Charges</span>
+                  </div>
+                  <div className="col-4 text-end">
+                    <span>FREE</span>
+                  </div>
+                </div>
+                <div className="row">
+                  {" "}
+                  <div className="col-8">
+                    <span>Packaging Fees</span>
+                  </div>
+                  <div className="col-4 text-end">
+                    <span>₹59</span>
+                  </div>
+                </div>
+
+                <hr style={{ margin: 0 }} />
+                <div className="row">
+                  {" "}
+                  <div className="col-8 ">
+                    <span>
+                      <b> Total Amount</b>
+                    </span>
+                  </div>
+                  <div className="col-4 text-end">
+                    <span>
+                      <b>₹ 2000</b>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

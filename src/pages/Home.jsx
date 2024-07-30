@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
-import axios from "axios";
+
 import LatestReleaseCard from "../components/LatestReleaseCard";
 import "./home.css";
 import LatestReleasesProducts from "../components/LatestReleasesProducts";
@@ -16,73 +16,9 @@ import {
 } from "../api/apiFetch";
 
 function Home({ products, setProducts }) {
-  // const [products, setProducts] = useState();
   const [latest, setLatest] = useState();
   const [categories, setCategories] = useState();
   const [instaVideos, setInstaVideos] = useState();
-
-  // const fetchProductData = async () => {
-  //   try {
-  //     const res = await axios.get("/products", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     if (res.status === 200) {
-  //       await setProducts(res.data);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const fetchLatestRelease = async () => {
-  //   try {
-  //     const res = await axios.get("/latest_releases", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     if (res.status === 200) {
-  //       setLatest(res.data);
-  //       console.log(latest);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const fetchVideos = async () => {
-  //   try {
-  //     const res = await axios.get("/insta_videos", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     if (res.status === 200) {
-  //       setInstaVideos(res.data);
-  //       console.log(instaVideos);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const fetchCategory = async () => {
-  //   try {
-  //     const res = await axios.get("/categories", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     if (res.status === 200) {
-  //       setCategories(res.data);
-  //       console.log(categories);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     fetchProductData(setProducts);

@@ -9,7 +9,7 @@
     img {
       width: 140px;
       margin: 0;
-      padding: 0;
+      /* padding: 0; */
     }
   }
 }
@@ -17,6 +17,5 @@
 @media (max-width: 425px) {
   .nav-icon {
     padding: 5px !important;
-  
   }
 }

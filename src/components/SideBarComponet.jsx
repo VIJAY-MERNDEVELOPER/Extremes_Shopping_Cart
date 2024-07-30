@@ -3,7 +3,7 @@ import React from "react";
 
 function SideBarComponet({ category, image }) {
   return (
-    <aside className=" position-relative mt-2 mb-5 sidebar-list">
+    <aside className=" position-relative mt-4 mb-4 sidebar-list">
       <div className="row justify-content-center mb-5 ">
         {" "}
         <img

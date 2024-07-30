@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const fetchCart = async (setCart) => {
   try {
     const res = await axios.get("/cart", {
@@ -24,7 +25,7 @@ export const fetchProductData = async (setProducts) => {
       },
     });
     if (res.status === 200) {
-      await setProducts(res.data);
+      setProducts(res.data);
     }
   } catch (error) {
     console.log(error);
