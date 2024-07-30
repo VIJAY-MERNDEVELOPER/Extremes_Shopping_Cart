@@ -1,7 +1,26 @@
-.nav-container .logo {
+.nav-container {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  
+}
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav-app-bar {
+  background-color: #ff0000 !important;
+  padding: 10px 50px;
+}
+@media (max-width: 426px) {
+  .nav-app-bar {
+    padding: 10px 0;
+  }
+  .logo {
+    justify-content: center;
+  }
 }
 
 @media (min-width: 320px) and (max-width: 426px) {

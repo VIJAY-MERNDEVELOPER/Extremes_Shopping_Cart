@@ -1,18 +1,22 @@
 .App {
   width: 100%;
-  overflow-x: hidden;
+  /* overflow-x: hidden !important; */
   display: flex;
   flex-direction: column;
   align-content: space-evenly;
-  gap: calc(auto);
+  padding: 0 !important;
+  /* gap: calc(auto); */
 }
 
 .main-content {
   width: 100%;
   flex-grow: 1;
   height: calc(auto);
+  overflow-x: hidden;
+  padding: 0 !important;
 }
 
 .footer {
+  width: 100% !important;
   margin-top: calc(auto);
 }

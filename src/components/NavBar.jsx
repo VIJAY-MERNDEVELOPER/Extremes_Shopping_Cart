@@ -67,13 +67,7 @@ function NavBar({ cart, setCart }) {
   }, []);
   return (
     <Box sx={{ flexGrow: 1 }} className="nav-container">
-      <AppBar
-        position="static"
-        style={{
-          backgroundColor: "#FF0000",
-          padding: "10px 50px",
-        }}
-      >
+      <AppBar className="nav-app-bar" position="static">
         <Toolbar>
           <IconButton
             size="larger"
@@ -103,7 +97,7 @@ function NavBar({ cart, setCart }) {
               <img src="/extremes-logo.png" width="205px" />
             </Link>
           </Grid>{" "}
-          <Box sx={{ display: { xs: "flex" } }}>
+          <Box sx={{ display: { xs: "flex", gap: 8 } }}>
             {" "}
             <IconButton
               size="large"
