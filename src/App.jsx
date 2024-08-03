@@ -20,8 +20,11 @@ function App() {
   const [products, setProducts] = useState([]);
 
   return (
-    <div className=" row justify-content-center gap-2" style={{ margin: 0 }}>
-      <div className="App  ">
+    <div
+      className=" row justify-content-center gap-2"
+      style={{ margin: 0, backgroundColor: "rgb(241, 243, 246)" }}
+    >
+      <div className="App  " style={{ position: "sticky", top: 0, zIndex: 1 }}>
         <NavBar cart={cart} setCart={setCart} setProducts={setProducts} />
       </div>
       <div className="main-content">

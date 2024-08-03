@@ -1,0 +1,17 @@
+.cart-wrapper {
+  /* border: 1px solid rgba(210, 210, 210, 0.6); */
+
+  overflow: auto;
+  scroll-behavior: smooth;
+  padding-top: 10;
+  max-height: 90vh;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.checkout-container {
+  border: 1px solid rgba(210, 210, 210, 0.6);
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  width:

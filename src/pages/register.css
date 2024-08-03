@@ -1,23 +1,33 @@
 .register-container {
-  width: 100%;
-  max-width: 1000px;
+  width: 40%;
+  /* max-width: 1000px; */
   height: auto;
+  margin: 0;
   /* height: 100%; */
   padding-left: 0;
+  background-color: white;
+
+  @media (max-width: 1025px) {
+    width: 50%;
+  }
+
   /* overflow: hidden; */
   @media (max-width: 769px) {
     margin-left: 0;
     margin-right: 0;
-    width: 100%;
+    width: 70%;
     height: 100%;
+  }
+  @media (max-width: 376px) {
+    width: 90%;
   }
 }
 
 .register-form-container {
-  background-color: rgba(239, 240, 234, 0.973);
+  background-color: white;
   padding: 20px 10px 20px 10px;
   width: 100%;
-  border: 1px solid rgba(221, 223, 214, 0.809);
+
   font-weight: 600;
 
   @media (max-width: 426px) {

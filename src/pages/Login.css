@@ -1,25 +1,43 @@
 .login-wrapper {
-  width: 50%;
-  height: 100%;
+  width: 30vw;
+  height: auto !important;
+  background-color: white;
+  font-weight: 500;
+  @media (max-width: 1025px) {
+    width: 50vw;
+  }
 
   @media (max-width: 769px) {
     margin-left: 0;
     margin-right: 0;
+    width: 60vw;
+    height: auto;
+  }
+  @media (max-width: 426px) {
     width: 100vw;
-    height: 100%;
   }
 }
 .login-form-container {
-  background-color: rgba(239, 240, 234, 0.973);
+  background-color: white;
   height: 100%;
+  width: 50%;
   /* color: red; */
-  padding: 20px 10px 0 10px;
-  border: 1px solid rgba(221, 223, 214, 0.809);
+  padding: 20px 20px; 
+  /* border: 1px solid rgba(221, 223, 214, 0.809); */
+  margin: 50px;
   font-weight: 600;
   @media (max-width: 426px) {
     width: 100% !important;
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 20px;
+  }
+}
+
+.register-google-btn {
+  background-color: white;
+  margin: 0 150px 0 5px;
+  @media (max-width: 426px) {
+    margin: 0 50px 0 5px;
   }
 }

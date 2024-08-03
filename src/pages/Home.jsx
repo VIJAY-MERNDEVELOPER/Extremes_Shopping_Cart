@@ -28,7 +28,12 @@ function Home({ products, setProducts }) {
   }, []);
 
   return (
-    <div className="home-container">
+    <div
+      className="home-container"
+      style={{
+        maxWidth: "100%",
+      }}
+    >
       <Header />
       <div className="row justify-content-center main-layout">
         {/* Latest Rellease section */}

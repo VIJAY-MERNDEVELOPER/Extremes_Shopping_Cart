@@ -8,10 +8,10 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 function Footer() {
   return (
     <div
-      className="my-5"
+      className=""
       style={{
         borderTop: "1px solid rgba(238, 231, 231, 0.8)",
-        paddingTop: "10px",
+        // paddingTop: "0px",
       }}
     >
       <div

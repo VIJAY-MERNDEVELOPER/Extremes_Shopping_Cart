@@ -9,6 +9,10 @@ import { BrowserRouter } from "react-router-dom";
 const queryClient = new QueryClient();
 axios.defaults.baseURL = "https://extremes-dummy-server.onrender.com/";
 
+// " http://localhost:8000";
+
+// "https://extremes-dummy-server.onrender.com/";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>

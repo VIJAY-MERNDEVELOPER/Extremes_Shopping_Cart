@@ -17,25 +17,28 @@ function Login() {
 
   return (
     <div
-      className="container d-flex justify-content-center  my-5"
-      style={{
-        maxWidth: "100%",
-      }}
+      className="container d-flex justify-content-center py-5"
+      style={{ width: "100%" }}
     >
-      <div className="row justify-content-center align-items-center login-wrapper">
-        <div className=" col-sm-12 col-md-6 col-lg-6  login-form-container">
-          <h4 className="mb-5 d-flex justify-content-center">LOGIN</h4>
-          <form>
-            {!passwordState && (
+      <div className="row justify-content-center  login-wrapper">
+        {" "}
+        <h4 className="row justify-content-center "> Login</h4>
+        <form style={{ width: "100%" }} className="row gap-4 mt-3 py-4">
+          <div className="col-12">
+            {!passwordState ? (
               <>
-                <label htmlFor="inputEmail" className="form-label">
+                <label htmlFor="inputEmail" className="form-label ">
                   Enter Email/Mobile number
                   <span style={{ color: "red" }}> &#42;</span>
                 </label>
-                <input type="text" id="inputEmail" className="form-control" />
+                <input
+                  type="text"
+                  id="email"
+                  className="form-control"
+                  style={{ borderRadius: 0, border: "2px solid rgb(255,0,0)" }}
+                />
               </>
-            )}
-            {passwordState && (
+            ) : (
               <>
                 {" "}
                 <label htmlFor="inputPassword" className="form-label ">
@@ -45,59 +48,83 @@ function Login() {
                   type="text"
                   id="inputPassword"
                   className="form-control"
+                  style={{ borderRadius: 0, border: "2px solid rgb(255,0,0)" }}
                 />
               </>
             )}
-
-            <div className="row justify-content-center ">
-              <button
-                type="submit"
-                className="btn btn-danger  my-4 w-50 text-center"
-                style={{ fontWeight: 600, textAlign: "center" }}
-                onClick={(e) => handlePasswordState(e)}
-              >
-                {!passwordState ? (
-                  <>
-                    <span style={{ marginRight: 10 }}>CONTINUE</span>
-                    <span>
-                      <ArrowRightAltIcon />
-                    </span>
-                  </>
-                ) : (
-                  "Login"
-                )}
-              </button>
-              <div className="d-flex justify-content-between">
-                <Link
-                  to={"/forgetpassword"}
-                  className="justify-content-center"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  Forget Password?
-                </Link>
-                <Link
-                  to={"/register"}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  Register Now
-                </Link>
-              </div>
-            </div>
-          </form>
-          <Divider sx={{ padding: "30px 0" }}> Or</Divider>
-          <div className="row justify-content-center align-items-center my-3">
+          </div>
+          <div className="col-12">
             <button
-              className="btn btn-primary d-flex justify-content-center align-items-center"
-              style={{ width: "60%", fontWeight: 600 }}
+              type="submit"
+              style={{
+                width: "100%",
+                backgroundColor: "rgb(255,0,0)",
+                border: "none",
+                padding: 5,
+                color: "white",
+                fontWeight: "500",
+              }}
+              onClick={(e) => handlePasswordState(e)}
             >
-              <span style={{ backgroundColor: "white", margin: "0 15px" }}>
-                {" "}
-                <img src="/google_1.png" alt="google" style={{ padding: 2 }} />
-              </span>{" "}
-              Continue With Google
+              {!passwordState ? (
+                <>
+                  <span style={{ marginRight: 10 }}>CONTINUE</span>
+                  <span>
+                    <ArrowRightAltIcon />
+                  </span>
+                </>
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
-        </div>
+          <div className="col-12 ">
+            <div className="d-flex justify-content-between">
+              <Link
+                to={"/forgetpassword"}
+                className="justify-content-center"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Forget Password?
+              </Link>
+              <Link
+                to={"/register"}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Register Now
+              </Link>
+            </div>
+          </div>
+          <div className="col-12">
+            {" "}
+            <Divider sx={{ padding: "30px 0" }}> Or</Divider>
+          </div>
+
+          <div className="col-12">
+            <button
+              style={{
+                width: "100%",
+                backgroundColor: " rgb(66, 133, 244)",
+                border: "rgb(66,133,244)",
+                color: "white",
+                fontWeight: "500",
+                padding: 5,
+              }}
+              className="d-flex justify-content-start align-items-center "
+            >
+              <span className="register-google-btn">
+                {" "}
+                <img
+                  src="/google_1.png"
+                  alt="google"
+                  style={{ padding: 1 }}
+                  width={20}
+                />
+              </span>
+              <span>Continue With Google</span>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
