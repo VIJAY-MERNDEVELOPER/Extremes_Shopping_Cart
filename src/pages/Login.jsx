@@ -23,7 +23,7 @@ function Login() {
       <div className="row justify-content-center  login-wrapper">
         {" "}
         <h4 className="row justify-content-center "> Login</h4>
-        <form style={{ width: "100%" }} className="row gap-4 mt-3 py-4">
+        <form className="row gap-4 mt-3 py-4">
           <div className="col-12">
             {!passwordState ? (
               <>
