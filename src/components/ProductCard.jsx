@@ -8,9 +8,6 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import "./styles/ProductCard.css";
 
 function ProductCard({ product }) {
-
-
-  
   return (
     <Card
       sx={{
@@ -55,7 +52,11 @@ function ProductCard({ product }) {
           </Typography>
         </CardContent>
       </Link>
-      <Grid display={"flex"} justifyContent={"center"}>
+      <Grid
+        display={"flex"}
+        justifyContent={"center"}
+        style={{ paddingBottom: 5 }}
+      >
         <button className="add-to-cart-btn"> Add To Cart</button>
       </Grid>
     </Card>
