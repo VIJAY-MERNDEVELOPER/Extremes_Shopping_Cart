@@ -7,9 +7,7 @@ import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
-axios.defaults.baseURL = "https://extremes-dummy-server.onrender.com/";
-
-// " http://localhost:8000";
+axios.defaults.baseURL = " http://localhost:8000";
 
 // "https://extremes-dummy-server.onrender.com/";
 
