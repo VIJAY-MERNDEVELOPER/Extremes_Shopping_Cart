@@ -7,6 +7,7 @@
   max-height: 90vh;
   scrollbar-width: none;
   position: relative;
+  left: 10px;
 }
 
 .checkout-container {
@@ -14,4 +15,18 @@
   background-color: white;
   position: sticky;
   bottom: 0;
+  @media (max-width: 1025px) {
+    /* display: none; */
+  }
+}
+
+@media (min-width: 1025px) {
+  .price-container {
+    position: fixed;
+    left: 65%;
+    top: 91px;
+    .checkout-container {
+      /* display: none; */
+    }
+  }
 }

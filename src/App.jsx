@@ -37,7 +37,7 @@ function App() {
             path="/cart"
             element={<Cart cart={cart} setCart={setCart} products={products} />}
           />
-          <Route path="/product:id" element={<Product />} />
+          <Route path="/product/:id" element={<Product />} />
           <Route path="/products" element={<Products />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
