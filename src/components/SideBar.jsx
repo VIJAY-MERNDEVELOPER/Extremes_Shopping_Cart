@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import SideBarComponent from "./SideBarComponent";
 import AddIcon from "@mui/icons-material/Add";
-import "./styles/SideBar.css";
+import "./styles/sidebar.css";
 
 function SideBar({ toggleDrawer }) {
   const sideBarData = [
