@@ -16,19 +16,20 @@ import "./styles/navbar.css";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Drawer, Grid } from "@mui/material";
-import SideBar from "./SideBar";
 
 import { Link, NavLink } from "react-router-dom";
 import { fetchCart } from "../api/apiFetch";
+import SideBar from "./SideBar";
+// import SideBar from "../../../SERVER/SideBar";
 
-function NavBar({ cart, setCart }) {
+function NavBar({ cart, setCart, open, setOpen, toggleDrawer }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
+  // const toggleDrawer = (newOpen) => () => {
+  //   setOpen(newOpen);
+  // };
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -66,7 +67,11 @@ function NavBar({ cart, setCart }) {
     fetchCart(setCart);
   }, []);
   return (
-    <Box sx={{ flexGrow: 1 }} className="nav-container">
+    <Box
+      sx={{ flexGrow: 1 }}
+      className="nav-container"
+      style={{ position: "relative" }}
+    >
       <AppBar className="nav-app-bar" position="static">
         <Toolbar>
           <IconButton
@@ -80,7 +85,7 @@ function NavBar({ cart, setCart }) {
             <MenuIcon />
           </IconButton>{" "}
           <Drawer open={open} onClose={toggleDrawer(false)}>
-            <SideBar />
+            <SideBar toggleDrawer={toggleDrawer} />
           </Drawer>
           <Grid>
             <Typography

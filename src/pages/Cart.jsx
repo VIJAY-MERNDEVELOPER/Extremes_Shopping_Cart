@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CartItem from "../components/CartItem";
 import { fetchCart, fetchProductData } from "../api/apiFetch";
 import { Divider } from "@mui/material";
@@ -12,10 +12,25 @@ import PriceDetailComponent from "../components/PriceDetailComponent";
 function Cart({ cart, setCart, products, setProducts }) {
   const cartContainer = useRef();
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const handleLoading = () => {
+      products ? setIsLoading(false) : setIsLoading(true);
+    };
+    handleLoading();
+    console.log(isLoading);
+  }, []);
+
   return (
     <div className="container " style={{ width: "100%" }}>
-      {!products ? (
-        <span className="d-flex justify-content-center">... cart Loading</span>
+      {!products || !cart ? (
+        <div
+          className="d-flex justify-content-center"
+          style={{ height: "100vh", backgroundColor: "red" }}
+        >
+          ... cart Loading
+        </div>
       ) : (
         <div className="row  cart-wrapper" ref={cartContainer}>
           {" "}
@@ -62,7 +77,7 @@ function Cart({ cart, setCart, products, setProducts }) {
                 return (
                   <>
                     {" "}
-                    <div key={idx} className="row pb-3">
+                    <div key={idx} className="col-xg-10   pb-3">
                       <CartItem
                         cart={cart}
                         products={products}

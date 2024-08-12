@@ -6,6 +6,9 @@ import Chip from "@mui/material/Chip";
 import { Dropdown } from "@mui/base/Dropdown";
 import { MenuItem, Select } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import "./styles/Product.css";
+import { Link } from "react-router-dom";
 
 function Product() {
   const productView = [
@@ -25,6 +28,7 @@ function Product() {
       product_price: 499,
       offer: 10,
       available_quantity: 10,
+      category: "men",
       deliverBy: 4,
     },
   ];
@@ -51,49 +55,55 @@ function Product() {
 
   const [productDetailState, setProductDetailState] = useState(false);
 
-  const productDetailRef = useRef();
+  const productDetailStateRef = useRef();
   const element = document.querySelector(".product-details-list");
 
-  const handleProductDetails = () => {
-    if (productDetailState === false) {
+  const handleProductDetails = (value) => {
+    if (value === "flex") {
+      productDetailStateRef.current.style.display = value;
+      setProductDetailState(false);
+    } else if (value === "none") {
+      productDetailStateRef.current.style.display = value;
       setProductDetailState(true);
     }
-    setProductDetailState(false);
   };
 
-  useEffect(() => {
-    if (productDetailState === true) {
-      element.style.display = "block";
-    } else if (productDetailState === false) {
-      element.style.display = "inline";
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (productDetailState === true) {
+  //     element.style.display = "block";
+  //   } else if (productDetailState === false) {
+  //     element.style.display = "inline";
+  //   }
+  // }, []);
   console.log("product");
 
   return (
-    <div className="container" style={{ width: "100%", height: "auto" }}>
+    <div className="container" style={{ maxHeight: "100%", zIndex: 0 }}>
       <div className="row">
         <div
           className="col-5"
           style={{
             width: "40%",
-            // backgroundImage: `url(${productView[0].product_image_1})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
+            padding: 0,
           }}
         >
-          <div className="row">
+          <div className="row" style={{ margin: 0 }}>
             <div className="col-2">
               {productView[0].product_images.map((images, idx) => {
                 return (
-                  <div className="row mb-2" key={idx}>
+                  <div
+                    className="row mb-2 image-list-hover"
+                    key={idx}
+                    onMouseOver={() => {
+                      setImage(images);
+                    }}
+                  >
                     <button
                       style={{
                         padding: "10px 0px",
                         margin: 0,
-                        border: "1px solid rgb(255,0,0)",
+                        border: "none",
                       }}
-                      onMouseOver={() => setImage(images)}
                     >
                       <img
                         src={images}
@@ -111,6 +121,8 @@ function Product() {
                 src={image}
                 alt={productView[0].product_name}
                 width={"100%"}
+                height={"100%"}
+                style={{ border: "1px solid black", padding: 0 }}
               />
             </div>
           </div>
@@ -132,7 +144,7 @@ function Product() {
                 ADD TO CART
               </button>
             </div>
-            <div className="col-6">
+            <div className="col-6 ">
               <button
                 style={{
                   width: "80%",
@@ -152,36 +164,44 @@ function Product() {
           </div>
         </div>
         <div
-          className="col-6"
+          className="col-7"
           style={{
-            height: "80vh",
-            width: "60%",
-            backgroundColor: "rgb(283,213,0)",
+            height: "100vh",
           }}
         >
-          <p className="row">{productView[0].product_brand}</p>
-          <p className="row">{productView[0].product_description}</p>
-          <p className="row" style={{ color: "green" }}>
-            Special Price
+          <div className="row">
+            <ol className="breadcrumb">
+              <Link to={"/"} className="breadcrumb-item">
+                Home
+              </Link>
+              <Link to={"/men"} className="breadcrumb-item">
+                {productView[0].category}{" "}
+              </Link>
+              <Link className="breadcrumb-item active" aria-current="page">
+                {productView[0].product_name}
+              </Link>
+            </ol>
+          </div>
+          <span className="row product-title">
+            {productView[0].product_brand}&nbsp;
+          </span>
+          <p className="row product-name">
+            {productView[0].product_description}
           </p>
           <div className="row">
+            {" "}
+            <span className="row" style={{ color: "green" }}>
+              Special Price &nbsp;
+            </span>
             <div className="col-12" style={{ padding: 0 }}>
-              <span style={{ fontWeight: "bold" }}>
+              <span className="offer-price">
                 ₹
                 {productView[0].product_price -
                   Math.round(
                     productView[0].product_price * (productView[0].offer / 100)
                   )}
               </span>{" "}
-              <span
-                style={{
-                  padding: 0,
-                  textDecoration: "line-through",
-                  fontWeight: "bold",
-                  opacity: 0.6,
-                  marginLeft: 10,
-                }}
-              >
+              <span className="original-price">
                 ₹{productView[0].product_price}
               </span>
               <span style={{ marginLeft: 10 }}>
@@ -189,25 +209,33 @@ function Product() {
               </span>
             </div>
           </div>
-          <div className="row mt-2">
-            <ul
-              className="d-flex gap-5"
-              style={{ listStyle: "none", padding: 0 }}
-            >
-              <li>Size</li>
-              <li>S</li>
-              <li>M</li>
-              <li>L</li>
-              <li>XL</li>
-              <li>XXL</li>
-            </ul>
+          <div className="row mt-3 ">
+            <div className="col-1 mt-2" style={{ paddingLeft: 0 }}>
+              <span>Size</span>
+            </div>
+            <div className="col-10">
+              <ul
+                className="d-flex gap-4 size-list "
+                style={{ listStyle: "none", padding: 0 }}
+              >
+                <li>S</li>
+                <li>M</li>
+                <li>L</li>
+                <li>XL</li>
+                <li>XXL</li>
+              </ul>
+            </div>
           </div>
           <div className="row">
-            <span style={{ padding: 0, marginBottom: 10 }}>
-              {" "}
-              <PlaceIcon />
-              Deliver To
-            </span>{" "}
+            <div className="col-12" style={{ paddingLeft: 0 }}>
+              <span>
+                {" "}
+                <PlaceIcon
+                  style={{ color: "rgb(40, 116, 240)", fontSize: "1.2rem" }}
+                />
+              </span>
+              <span style={{ padding: 0, marginBottom: 10 }}> Deliver To</span>{" "}
+            </div>
             <select
               name=""
               id=""
@@ -215,6 +243,7 @@ function Product() {
                 width: "45%",
                 height: 35,
                 border: "2px solid rgb(255,0,0)",
+                marginBottom: 15,
               }}
             >
               {address.map((address, idx) => {
@@ -228,23 +257,37 @@ function Product() {
               <option value=""></option>
             </select>
           </div>
-          <div className="row">Delivery By 9 Aug ,Fri | Free</div>{" "}
-          <div className="row my-5 align-items-center">
+          <div
+            className="row"
+            style={{ paddingBottom: "20px", borderBottom: "1px solid grey" }}
+          >
+            Delivery By 9 Aug ,Fri | Free
+          </div>{" "}
+          <div className="row my-4 align-items-center" style={{ padding: 0 }}>
             <div className="col-8">
               <h4>Product Details</h4>{" "}
             </div>
             <div className="col-4">
-              <button
-                style={{ border: "none", background: "none" }}
-                onClick={() => handleProductDetails()}
-              >
-                <AddIcon />
-              </button>
+              {productDetailState ? (
+                <button
+                  style={{ border: "none", background: "none" }}
+                  onClick={() => handleProductDetails("flex")}
+                >
+                  <AddIcon />
+                </button>
+              ) : (
+                <button
+                  style={{ border: "none", background: "none" }}
+                  onClick={() => handleProductDetails("none")}
+                >
+                  <RemoveIcon />
+                </button>
+              )}
             </div>
             <ul
-              ref={productDetailRef}
               className="row gap-3 product-details-list"
-              style={{ listStyle: "none", display: "none" }}
+              style={{ listStyle: "none" }}
+              ref={productDetailStateRef}
             >
               <li className="row">
                 <div className="col-5">Type</div>

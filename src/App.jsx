@@ -11,13 +11,18 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ForgetPassword from "./pages/ForgetPassword";
 // import {} from "react-router";
 
 function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
 
   return (
     <div
@@ -25,7 +30,14 @@ function App() {
       style={{ margin: 0, backgroundColor: "rgb(241, 243, 246)" }}
     >
       <div className="App  " style={{ position: "sticky", top: 0, zIndex: 1 }}>
-        <NavBar cart={cart} setCart={setCart} setProducts={setProducts} />
+        <NavBar
+          cart={cart}
+          setCart={setCart}
+          setProducts={setProducts}
+          open={open}
+          setOpen={setOpen}
+          toggleDrawer={toggleDrawer}
+        />
       </div>
       <div className="main-content">
         <Routes>
@@ -38,7 +50,16 @@ function App() {
             element={<Cart cart={cart} setCart={setCart} products={products} />}
           />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/products" element={<Products />} />
+          <Route
+            path="/products"
+            element={
+              <Products
+                products={products}
+                setProducts={setProducts}
+                toggleDrawer={toggleDrawer}
+              />
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />

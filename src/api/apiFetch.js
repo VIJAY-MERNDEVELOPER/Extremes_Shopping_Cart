@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const fetchCart = async (setCart) => {
   try {
     const res = await axios.get("/cart", {

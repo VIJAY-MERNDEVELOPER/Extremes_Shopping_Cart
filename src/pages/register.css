@@ -1,11 +1,11 @@
 .register-container {
   width: 40%;
-  /* max-width: 1000px; */
-  height: auto;
-  margin: 0;
-  /* height: 100%; */
-  padding-left: 0;
+
+  height: calc(auto) !important;
+
   background-color: white;
+  font-weight: 500;
+  padding: 10px;
 
   @media (max-width: 1025px) {
     width: 50%;
@@ -15,25 +15,21 @@
   @media (max-width: 769px) {
     margin-left: 0;
     margin-right: 0;
-    width: 70%;
-    height: 100%;
+    width: 60%;
+    height: auto;
   }
-  @media (max-width: 376px) {
-    width: 90%;
+  @media (max-width: 426px) {
+    width: 100%;
   }
 }
 
-.register-form-container {
+.register-google-btn {
   background-color: white;
-  padding: 20px 10px 20px 10px;
-  width: 100%;
+  margin: 0 calc(30%) 0 5px;
+}
 
-  font-weight: 600;
-
-  @media (max-width: 426px) {
-    width: 100% !important;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 20px;
+@media (max-width: 426px) {
+  .register-google-btn {
+    margin: 0 calc(12%) 0 5px;
   }
 }

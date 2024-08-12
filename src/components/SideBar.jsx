@@ -1,12 +1,14 @@
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
-import "../components/styles/sidebar.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import SideBarComponet from "./SideBarComponet";
-import { Box } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import "./styles/SideBar.css";
+import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-function SideBar() {
+import SideBarComponent from "./SideBarComponent";
+import AddIcon from "@mui/icons-material/Add";
+
+function SideBar({ toggleDrawer }) {
   const sideBarData = [
     {
       category: "New Arrivals",
@@ -34,16 +36,19 @@ function SideBar() {
     {
       name: "Sign In",
       icon: "bi bi-person",
+      path: "/login",
       add: false,
     },
     {
       name: "Register",
       icon: "bi bi-pencil-square",
+      path: "/register",
       add: false,
     },
     {
       name: "Blog",
       icon: "bi bi-info-circle",
+      path: "/blog",
       add: false,
     },
     {
@@ -59,22 +64,26 @@ function SideBar() {
   ];
 
   return (
-    <Box
-      sx={{ width: 380, overflowX: "hidden" }}
-      role="presentation"
-      className="sidebar-container"
-    >
-      <div className=" sidebar col-lg-3 col-sm-12 col-md-6 border-1  ">
-        <div className="row  py-3 border-dark-subtle mx-0 border-dark-subtle border-bottom bg-white sticky-top">
-          <div className="col-4 text-center border-dark-subtle border-end ">
-            MEN
-          </div>
-          <div className="col-4 text-center border-dark-subtle border-end">
-            WOMEN
-          </div>
-          <div className="col-4 text-center">SALE</div>
-        </div>
-        <div className="row mt-3 justify-content-center ">
+    <div className="sidebar-container">
+      <div
+        className="row sidebar-header align-items-center"
+        style={{ margin: 0 }}
+      >
+        <button className="col-4 text-center" aria-selected="true">
+          <Link className="category-header"> MEN</Link>
+        </button>
+        <button className="col-4 text-center">
+          {" "}
+          <Link className="category-header"> WOMEN</Link>
+        </button>
+        <button className="col-4 text-center">
+          {" "}
+          <Link className="category-header"> SALE</Link>
+        </button>
+      </div>
+      <hr />
+      <div>
+        <div className="row my-3 justify-content-center ">
           <div className="col-11">
             <div className=" input-group ">
               <input
@@ -82,42 +91,58 @@ function SideBar() {
                 className="form-control"
                 aria-label="Dollar amount (with dot and two decimal places)"
                 placeholder="search for brands and products"
+                style={{ borderRadius: "0", borderColor: "rgb(181, 181, 181)" }}
               />
 
               <button
                 className="input-group-text "
-                style={{ backgroundColor: "rgb(255,0,0" }}
+                style={{
+                  backgroundColor: "rgb(255,0,0)",
+                  borderRadius: "0",
+                  borderColor: "rgb(181, 181, 181)",
+                }}
               >
                 <SearchIcon style={{ color: "white" }} />
               </button>
             </div>
           </div>
         </div>
-        <div className="row justify-content-center  mt-3">
-          {" "}
+        <div
+          className="row justify-content-center gap-3 category-list"
+          style={{ background: "none" }}
+        >
           {sideBarData.map((data, idx) => {
             return (
-              <SideBarComponet
+              <div
+                className="row justify-content-center"
                 key={idx}
-                category={data.category}
-                image={data.image}
-              />
+                style={{ width: "100%" }}
+              >
+                {" "}
+                <SideBarComponent
+                  data={data}
+                  toggleDrawer={toggleDrawer}
+                />{" "}
+              </div>
             );
           })}{" "}
         </div>
-        <div className="row justify-content-center  mt-3">
-          <ul className="list-group">
+        <div
+          className="col-12 justify-content-center  mt-3 position-absolute"
+          style={{ width: "100%" }}
+        >
+          <ul className="list-group" style={{ borderRadius: 0 }}>
             {" "}
             {data.map((data, idx) => {
               return (
                 <li key={idx} className="list-group-item  py-3 fs-6 fw-medium">
                   <div className="row align-center">
-                    <div className="col-8  col-lg-8 mx-3">
-                      <span className="me-1">
+                    <div className="col-8 col-lg-8 me-3">
+                      <span className="me-3">
                         {" "}
                         <i className={data.icon}></i>
                       </span>{" "}
-                      <span>{data.name}</span>
+                      <Link to={`${data.path}`} className="route-link">{data.name}</Link>
                     </div>
 
                     {data.add ? (
@@ -131,8 +156,8 @@ function SideBar() {
             })}
           </ul>
         </div>
-      </div>{" "}
-    </Box>
+      </div>
+    </div>
   );
 }
 

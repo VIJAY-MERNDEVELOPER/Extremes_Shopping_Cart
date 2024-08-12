@@ -1,0 +1,47 @@
+.image-list-hover:hover {
+  border: 1px solid rgb(255, 0, 0);
+}
+
+.product-title {
+  font-size: large;
+  font-weight: 600;
+  opacity: 0.5;
+}
+
+.product-name {
+  font-size: large;
+  font-weight: 500;
+}
+
+.offer-price {
+  font-weight: bold;
+}
+
+.original-price {
+  padding: 0;
+  text-decoration: line-through;
+  font-weight: bold;
+  opacity: 0.6;
+  margin-left: 10;
+}
+
+.size-list li {
+  box-sizing: border-box;
+  color: rgb(33, 33, 33);
+  width: 60px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid rgb(225, 218, 218);
+  padding: 6px 8px;
+  float: left;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    color: rgb(40, 116, 240);
+    border-color: rgb(40, 116, 240);
+  }
+}

@@ -110,14 +110,18 @@ function Login() {
                 fontWeight: "500",
                 padding: 5,
               }}
-              className="d-flex justify-content-start align-items-center "
+              className="d-flex  align-items-center "
             >
               <span className="register-google-btn">
                 {" "}
                 <img
-                  src="/google_1.png"
+                  src="/google-social-login.svg"
                   alt="google"
-                  style={{ padding: 1 }}
+                  style={{
+                    boxSizing: "border-box",
+                    // contain: "layout",
+                    float: "left",
+                  }}
                   width={20}
                 />
               </span>

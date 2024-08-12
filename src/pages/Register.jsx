@@ -1,20 +1,15 @@
-import React from "react";
-
 import "./register.css";
 import { Divider } from "@mui/material";
 
 function Register() {
   return (
     <div
-      className="container d-flex justify-content-center  my-5 "
+      className="container d-flex justify-content-center  py-5 "
       style={{ width: "100%" }}
     >
       <div className="row justify-content-center register-container">
         <h4 className="row justify-content-center">New To Extremes</h4>
-        <form
-          action="submit"
-          className="row gap-3 mt-3 py-4 register-form-container"
-        >
+        <form action="submit" className="row gap-3 mt-3 ">
           <div className="col-12">
             <div className="row my-3">
               <div className="col-sm-12 col-md-6 ">
@@ -80,7 +75,7 @@ function Register() {
           <div className="col-12">
             <Divider sx={{ padding: "30px 0" }}> Or</Divider>
           </div>
-          <div className="col-12 justify-content-center align-items-center">
+          <div className="col-12 ">
             <button
               style={{
                 width: "100%",
@@ -90,14 +85,18 @@ function Register() {
                 fontWeight: "500",
                 padding: 5,
               }}
-              className="d-flex justify-content-start align-items-center "
+              className="d-flex align-items-center "
             >
               <span className="register-google-btn">
                 {" "}
                 <img
-                  src="/google_1.png"
+                  src="/google-social-login.svg"
                   alt="google"
-                  style={{ padding: 1 }}
+                  style={{
+                    boxSizing: "border-box",
+                    // contain: "layout",
+                    float: "left",
+                  }}
                   width={20}
                 />
               </span>

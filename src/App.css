@@ -5,16 +5,18 @@
   flex-direction: column;
   align-content: space-evenly;
   padding: 0 !important;
+
   /* gap: calc(auto); */
 }
 
 .main-content {
   width: 100%;
   flex-grow: 1;
-  height: calc(auto);
+  height: 80%;
   overflow-x: hidden;
   padding: 0 !important;
   background-color: rgb(241, 243, 246);
+  scrollbar-width: none;
 }
 
 .footer {
