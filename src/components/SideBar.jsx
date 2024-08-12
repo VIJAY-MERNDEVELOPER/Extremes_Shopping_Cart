@@ -2,11 +2,12 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "./styles/SideBar.css";
+
 import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import SideBarComponent from "./SideBarComponent";
 import AddIcon from "@mui/icons-material/Add";
+import "./styles/SideBar.css";
 
 function SideBar({ toggleDrawer }) {
   const sideBarData = [
@@ -142,7 +143,9 @@ function SideBar({ toggleDrawer }) {
                         {" "}
                         <i className={data.icon}></i>
                       </span>{" "}
-                      <Link to={`${data.path}`} className="route-link">{data.name}</Link>
+                      <Link to={`${data.path}`} className="route-link">
+                        {data.name}
+                      </Link>
                     </div>
 
                     {data.add ? (
