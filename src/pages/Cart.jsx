@@ -9,12 +9,14 @@ import PriceDetailsCard from "../components/CheckOutButton";
 import CheckOutButton from "../components/CheckOutButton";
 import PriceDetailComponent from "../components/PriceDetailComponent";
 
-function Cart({ cart, setCart, products, setProducts }) {
+function Cart({ cart, setCart, products, setProducts, heightValue }) {
   const cartContainer = useRef();
 
   const [isLoading, setIsLoading] = useState(false);
+  console.log(heightValue);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const handleLoading = () => {
       products ? setIsLoading(false) : setIsLoading(true);
     };
@@ -23,7 +25,7 @@ function Cart({ cart, setCart, products, setProducts }) {
   }, []);
 
   return (
-    <div className="container " style={{ width: "100%" }}>
+    <div className="container " style={{ width: "100%", height: "100%" }}>
       {!products || !cart ? (
         <div
           className="d-flex justify-content-center"

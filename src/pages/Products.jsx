@@ -7,10 +7,15 @@ import ProductCard from "../components/ProductCard";
 function Products({ products, setProducts, toggleDrawer }) {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const category = searchParams.get("category");
+  const category = searchParams
+    .get("category")
+    .split("-")
+    .join(" ")
+    .toUpperCase();
   const price = searchParams.get("price");
   const filterValue = searchParams.get("value");
   console.log(price);
+  console.log(category);
   console.log(filterValue);
 
   const scrollerRef = useRef();
@@ -25,7 +30,7 @@ function Products({ products, setProducts, toggleDrawer }) {
   };
 
   useEffect(() => {
-    window.scrollTo(60, 0);
+    window.scrollTo(0, 0);
     fetchProductData(setProducts);
     toggleDrawer(false);
     // scrollerRef.scrollTo(0, 0);

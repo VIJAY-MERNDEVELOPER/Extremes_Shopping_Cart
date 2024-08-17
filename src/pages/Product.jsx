@@ -68,14 +68,9 @@ function Product() {
     }
   };
 
-  // useEffect(() => {
-  //   if (productDetailState === true) {
-  //     element.style.display = "block";
-  //   } else if (productDetailState === false) {
-  //     element.style.display = "inline";
-  //   }
-  // }, []);
-  console.log("product");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="container" style={{ maxHeight: "100%", zIndex: 0 }}>

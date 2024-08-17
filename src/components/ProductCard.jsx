@@ -12,7 +12,7 @@ function ProductCard({ product }) {
     <Card
       sx={{
         maxWidth: "100%",
-        maxHeight: 450,
+        maxHeight: 500,
         padding: 0,
         // border: 0,
         margin: 0,
@@ -21,7 +21,7 @@ function ProductCard({ product }) {
     >
       <Link to={`/product/${product.id}`} className="card-link">
         <CardMedia
-          sx={{ height: 250, width: "100%", padding: 0 }}
+          sx={{ height: 300, width: "100%", padding: 0, objectFit: "cover" }}
           image={product.product_image_1}
           title={product.product_name}
           className="card-image"

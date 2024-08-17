@@ -11,8 +11,12 @@ import Products from "./pages/Products";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ForgetPassword from "./pages/ForgetPassword";
+import Dashboard from "./pages/Admin/Dashboard";
+import AddProducts from "./components/Admin/AddProducts";
+import ProductsOveriew from "./components/Admin/ProductsOveriew";
+import UserManagement from "./components/Admin/UserManagement";
 // import {} from "react-router";
 
 function App() {
@@ -23,6 +27,10 @@ function App() {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div
@@ -45,9 +53,17 @@ function App() {
             path="/"
             element={<Home products={products} setProducts={setProducts} />}
           />
+
           <Route
             path="/cart"
-            element={<Cart cart={cart} setCart={setCart} products={products} />}
+            element={
+              <Cart
+                cart={cart}
+                setCart={setCart}
+                products={products}
+                // heightValue={heightValue}
+              />
+            }
           />
           <Route path="/product/:id" element={<Product />} />
           <Route
@@ -63,9 +79,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
+          <Route path="/admin/dashboard" element={<Dashboard />}>
+            <Route path="addproducts" element={<AddProducts />} />
+            <Route path="productsoverview" element={<ProductsOveriew />} />
+            <Route path="usermanagement" element={<UserManagement />} />
+          </Route>
         </Routes>
       </div>
-      <div className="footer">
+      <div className="footer ">
         <Footer />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -6,29 +6,38 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import SideBarComponent from "./SideBarComponent";
 import AddIcon from "@mui/icons-material/Add";
+import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import "./styles/sidebar.css";
 
 function SideBar({ toggleDrawer }) {
   const sideBarData = [
     {
-      category: "New Arrivals",
+      category: "new arrivals",
       image:
-        "https://culture-kings-sanity.imgix.net/3b5b3e6fdc4c4a5de77df4ded2097b335344bbb3-876x280.jpg?w=600&amp;auto=compress,format",
+        "https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/p/c/g/m-t5-lvd-hikaru-original-imah3572ky5grg4p.jpeg?q=70",
+      collections: "men",
+      title: "men's new arrivals",
     },
     {
-      category: "Trending Now",
-      image:
-        "https://culture-kings-sanity.imgix.net/41f101b189cb781e750bd788caa9378cad6e679d-876x280.jpg?w=600&auto=compress,format",
+      category: "trending now",
+      image: "/xxl-pct09201001-polo-plus-original-imafuvp5zyzpfn97 (1).webp",
+      collections: "men",
+      title: "trending now",
     },
     {
-      category: "Upcoming Releases",
+      category: "new arrivals",
       image:
-        "https://culture-kings-sanity.imgix.net/2c6d8a36da9a83e7155fc0cf7e372d695217a865-876x280.jpg?w=600&auto=compress,format",
+        "https://rukminim2.flixcart.com/image/612/612/kxnl6kw0/t-shirt/w/4/2/s-bi-women-v-neck-105-black-bi-fashion-original-imaga2d8sn286uqk.jpeg?q=70",
+      collections: "women",
+      title: "wommen's new arrivals",
     },
     {
-      category: "Tops",
+      category: "trending now",
       image:
-        "https://culture-kings-sanity.imgix.net/7d1913f0b3d9b4226b34fb1998c7160262f51ea6-876x280.jpg?w=600&auto=compress,format",
+        "https://rukminim2.flixcart.com/image/612/612/kwgpz0w0/t-shirt/l/5/l/xxl-womens-style-001-youthpoi-original-imag94zrzerxrzyn.jpeg?q=70",
+      collections: "women",
+      title: "trending now",
     },
   ];
 
@@ -45,12 +54,12 @@ function SideBar({ toggleDrawer }) {
       path: "/register",
       add: false,
     },
-    {
-      name: "Blog",
-      icon: "bi bi-info-circle",
-      path: "/blog",
-      add: false,
-    },
+    // {
+    //   name: "Blog",
+    //   icon: "bi bi-info-circle",
+    //   path: "/blog",
+    //   add: false,
+    // },
     {
       name: "Shipping & Returns",
       icon: "bi bi-bag-check",
@@ -63,22 +72,36 @@ function SideBar({ toggleDrawer }) {
     },
   ];
 
+  const [filteredCategory, setFilteredCategory] = useState();
+  const handleCategoryType = (type) => {
+    setFilteredCategory(
+      sideBarData.filter((data) => data.collections === type)
+    );
+  };
+
+  useEffect(() => {
+    handleCategoryType("men");
+  }, []);
+
   return (
-    <div className="sidebar-container">
+    <div className="sidebar-container bg-body-secondary">
       <div
         className="row sidebar-header align-items-center"
         style={{ margin: 0 }}
       >
-        <button className="col-4 text-center" aria-selected="true">
-          <Link className="category-header"> MEN</Link>
+        <button
+          className="col-6 text-center"
+          onClick={() => handleCategoryType("men")}
+          aria-selected="true"
+        >
+          MEN
         </button>
-        <button className="col-4 text-center">
+        <button
+          className="col-6 text-center"
+          onClick={() => handleCategoryType("women")}
+        >
           {" "}
-          <Link className="category-header"> WOMEN</Link>
-        </button>
-        <button className="col-4 text-center">
-          {" "}
-          <Link className="category-header"> SALE</Link>
+          WOMEN
         </button>
       </div>
       <hr />
@@ -108,15 +131,15 @@ function SideBar({ toggleDrawer }) {
           </div>
         </div>
         <div
-          className="row justify-content-center gap-3 category-list"
+          className="row justify-content-center  category-list"
           style={{ background: "none" }}
         >
-          {sideBarData.map((data, idx) => {
+          {filteredCategory?.map((data, idx) => {
             return (
               <div
                 className="row justify-content-center"
                 key={idx}
-                style={{ width: "100%" }}
+                style={{ width: "90%" }}
               >
                 {" "}
                 <SideBarComponent
@@ -128,11 +151,25 @@ function SideBar({ toggleDrawer }) {
           })}{" "}
         </div>
         <div
-          className="col-12 justify-content-center  mt-3 position-absolute"
+          className="col-12 justify-content-center  mt-3 "
           style={{ width: "100%" }}
         >
           <ul className="list-group" style={{ borderRadius: 0 }}>
-            {" "}
+            <li className="list-group-item  py-3 fs-6 fw-medium">
+              <div className="row align-center">
+                <div className="col-8 col-lg-8 d-flex ">
+                  <span className="me-3">
+                    {" "}
+                    <DashboardCustomizeOutlinedIcon
+                      sx={{ fontSize: "18px", fontWeight: 100 }}
+                    />
+                  </span>{" "}
+                  <Link to={"/admin/dashboard"} className="route-link mt-1">
+                    Dashboard
+                  </Link>
+                </div>
+              </div>
+            </li>{" "}
             {data.map((data, idx) => {
               return (
                 <li key={idx} className="list-group-item  py-3 fs-6 fw-medium">

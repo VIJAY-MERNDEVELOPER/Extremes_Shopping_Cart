@@ -1,0 +1,22 @@
+.sidemenu-container {
+  width: 100%;
+  height: 100%;
+  border-right: 1px solid black;
+  margin: 0;
+}
+
+.sidemenu-list {
+  text-decoration: none;
+  list-style-type: none;
+  border-radius: 0;
+
+  li {
+    width: 100%;
+  }
+}
+
+@media (max-width: 426px) {
+  .sidemenu-list > li {
+    font-size: 0.8rem !important;
+  }
+}
