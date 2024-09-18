@@ -2,18 +2,15 @@
 import React, { Children } from "react";
 import SideMenu from "../../components/Admin/SideMenu";
 import { Outlet, Route, Routes } from "react-router-dom";
-import AddProducts from "../../components/Admin/AddProducts";
-import ProductsOveriew from "../../components/Admin/ProductsOveriew";
-import UserManagement from "../../components/Admin/UserManagement";
 
-function Dashboard({ children }) {
+function Dashboard() {
   return (
-    <div className="container" style={{ height: "80vh" }}>
+    <div className="container" style={{ height: "90%" }}>
       <div className="row">
         <div
           className="col-6 col-md-3 col-xl-2"
           style={{
-            height: "100%",
+            height: "90%",
             position: "fixed",
             top: "85px",
             left: 0,

@@ -3,6 +3,7 @@
   height: 100%;
   border-right: 1px solid black;
   margin: 0;
+  z-index: 0;
 }
 
 .sidemenu-list {

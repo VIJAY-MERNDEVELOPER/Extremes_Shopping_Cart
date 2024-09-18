@@ -13,15 +13,3 @@
 .input-style {
   border-radius: 0;
 }
-
-/* Hide arrow marks (spinner) in Chrome, Safari, Edge, and Opera */
-.no-spinner::-webkit-inner-spin-button,
-.no-spinner::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Hide arrow marks (spinner) in Firefox */
-.no-spinner {
-  -moz-appearance: textfield;
-}

@@ -35,7 +35,7 @@ function Products({ products, setProducts, toggleDrawer }) {
     toggleDrawer(false);
     // scrollerRef.scrollTo(0, 0);
     // console.log(products);
-  }, []);
+  }, [location]);
 
   return (
     <div className="container " ref={scrollerRef} style={{ maxHeight: "100%" }}>

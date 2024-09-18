@@ -47,6 +47,7 @@ function App() {
           toggleDrawer={toggleDrawer}
         />
       </div>
+
       <div className="main-content">
         <Routes>
           <Route
@@ -86,6 +87,7 @@ function App() {
           </Route>
         </Routes>
       </div>
+
       <div className="footer ">
         <Footer />
       </div>

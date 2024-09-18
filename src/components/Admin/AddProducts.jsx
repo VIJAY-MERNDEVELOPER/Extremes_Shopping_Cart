@@ -4,7 +4,11 @@ import "./addproducts.css";
 import { Form } from "react-router-dom";
 
 function AddProducts() {
-  const [productImages, setProductImages] = useState([""]);
+  const [image, setImage] = useState(false);
+  const [productImages, setProductImages] = useState([]);
+  const imageHandler = (e) => {
+    setProductImages([...productImages, ...Array.from(e.target.files)]);
+  };
 
   return (
     <div className="container" style={{ maxWidth: "100vw" }}>
@@ -12,16 +16,24 @@ function AddProducts() {
       <form className="row ">
         <div className="d-flex justify-content-center align-content-center ">
           <div className=" row justify-content-center align-items-center  ">
-            {productImages.map((input, idx) => {
+            {productImages.map((image, idx) => {
               return (
                 <div className="col-2 m-3" key={idx}>
                   <label
-                    htmlFor="uploads"
+                    htmlFor={`uploads${idx}`}
                     className="upload-btn border border-2 px-5 py-3 text-center"
                   >
-                    <CloudUploadOutlinedIcon
-                      sx={{ fontSize: "50px", color: "rgb(255,0,0)" }}
-                    />
+                    {image ? (
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt=""
+                        width={"100%"}
+                      />
+                    ) : (
+                      <CloudUploadOutlinedIcon
+                        sx={{ fontSize: "50px", color: "rgb(255,0,0)" }}
+                      />
+                    )}
                     <span className="row justify-content-center fw-bold">
                       {" "}
                       Uploads
@@ -29,8 +41,9 @@ function AddProducts() {
                   </label>
                   <input
                     type="file"
-                    id="uploads"
+                    id={`uploads${idx}`}
                     style={{ display: "none" }}
+                    onChange={imageHandler}
                   />{" "}
                   <button
                     className=" remove-btn "
@@ -110,7 +123,7 @@ function AddProducts() {
             />{" "}
           </div>
         </div>
-        <div className="row">
+        <div className="row my-4">
           <div className="col-4">
             {" "}
             <label htmlFor="productPrice"> Product Price</label>
@@ -139,8 +152,8 @@ function AddProducts() {
             />
           </div>
         </div>
-        <div className="row gap-1">
-          <div className="col-1 no-spinner">
+        <div className="row gap-1 my-4">
+          <div className="col-1 ">
             <label htmlFor="totalQty"> Total Qty</label>
             <input
               type="number"
@@ -189,6 +202,33 @@ function AddProducts() {
             />
           </div>
         </div>
+        <div className="row my-4">
+          <div className="col-4">
+            <label htmlFor="color">Color</label>
+            <input
+              type="text"
+              id="color"
+              className="form-control w-75 input-style"
+            />
+          </div>
+          <div className="col-4">
+            <label htmlFor="material">Material</label>
+            <input
+              type="text"
+              id="material"
+              className="form-control w-75 input-style"
+            />
+          </div>
+          <div className="col-4">
+            <label htmlFor="fit">Fit</label>
+            <input
+              type="text"
+              id="fit"
+              className="form-control w-75 input-style"
+            />
+          </div>
+        </div>
+        <div className="row"></div>
       </form>
     </div>
   );
