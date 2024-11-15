@@ -21,11 +21,11 @@ function LatestReleasesProducts({ products }) {
       // Check if at the end
       setTimeout(() => {
         const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-        console.log("left+width", Math.round(scrollLeft + clientWidth));
-        console.log("scrollwidth", scrollWidth);
+        // console.log("left+width", Math.round(scrollLeft + clientWidth));
+        // console.log("scrollwidth", scrollWidth);
         setIsAtEnd(Math.round(scrollLeft + clientWidth) === scrollWidth);
-        console.log(isAtEnd);
-      }, 300); // Adjust delay as needed
+        // console.log(isAtEnd);
+      }, 3000); // Adjust delay as needed
     }
 
     // console.log(categoryContainer.classList);
@@ -38,8 +38,8 @@ function LatestReleasesProducts({ products }) {
       const { scrollLeft, scrollWidth, clientWidth } = container;
       setScrollPosition(scrollLeft);
       setIsAtEnd(Math.round(scrollLeft + clientWidth) === scrollWidth);
-      console.log("left+width", Math.round(scrollLeft + clientWidth));
-      console.log("scrollwidth", scrollWidth);
+      // console.log("left+width", Math.round(scrollLeft + clientWidth));
+      // console.log("scrollwidth", scrollWidth);
     };
     container.addEventListener("scroll", handleScroll);
 

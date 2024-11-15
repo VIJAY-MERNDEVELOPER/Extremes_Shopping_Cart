@@ -1,7 +1,32 @@
+import { useDispatch, useSelector } from "react-redux";
 import "./register.css";
 import { Divider } from "@mui/material";
 
+import { useNavigate } from "react-router";
+
+import { useEffect } from "react";
+import { userState } from "../app/features/userSFeatures/userSlice.js";
+import { registerUser } from "../app/features/userSFeatures/userService.js";
+
 function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    dispatch(registerUser(Object.fromEntries(formData)));
+  };
+
+  const { user, status, message } = useSelector(userState);
+  console.log(user, status);
+
+  useEffect(() => {
+    if (user.userId) {
+      navigate("/");
+    }
+  }, [user, navigate]);
   return (
     <div
       className="container d-flex justify-content-center  py-5 "
@@ -9,18 +34,19 @@ function Register() {
     >
       <div className="row justify-content-center register-container">
         <h4 className="row justify-content-center">New To Extremes</h4>
-        <form action="submit" className="row gap-3 mt-3 ">
+        <form className="row gap-3 mt-3" onSubmit={handleRegister}>
           <div className="col-12">
             <div className="row my-3">
               <div className="col-sm-12 col-md-6 ">
                 <label htmlFor="firstName" className="form-label">
                   {" "}
-                  First Name <span style={{ color: "red" }}> &#42;</span>
+                  First Name <span className="asterik">&#42;</span>
                 </label>
                 <input
                   type="text"
                   id="firstName"
                   className="form-control"
+                  name="firstname"
                   style={{ borderRadius: 0, border: "2px solid rgb(255,0,0)" }}
                 />
               </div>
@@ -28,12 +54,13 @@ function Register() {
                 {" "}
                 <label htmlFor="lastName" className="form-label">
                   {" "}
-                  Last Name <span style={{ color: "red" }}> &#42;</span>
+                  Last Name <span className="asterik">&#42;</span>
                 </label>
                 <input
                   type="text"
                   id="lastName"
                   className="form-control"
+                  name="lastname"
                   style={{ borderRadius: 0, border: "2px solid rgb(255,0,0)" }}
                 />
               </div>
@@ -42,24 +69,25 @@ function Register() {
 
           <div className="col-12">
             <label htmlFor="inputEmail" className="form-label">
-              Enter Email/Mobile number
-              <span style={{ color: "red" }}> &#42;</span>
+              Enter Email/Mobile number <span className="asterik">&#42;</span>
             </label>
             <input
               type="text"
               id="inputEmail"
               className="form-control"
+              name="email"
               style={{ borderRadius: 0, border: "2px solid rgb(255,0,0)" }}
             />
           </div>
           <div className="col-12">
             <label htmlFor="inputPassword" className="form-label mt-3">
-              Enter Password <span style={{ color: "red" }}> &#42;</span>
+              Enter Password <span className="asterik">&#42;</span>
             </label>
             <input
-              type="text"
+              type="password"
               id="inputPassword"
               className="form-control"
+              name="password"
               style={{ borderRadius: 0, border: "2px solid rgb(255,0,0)" }}
             />
           </div>

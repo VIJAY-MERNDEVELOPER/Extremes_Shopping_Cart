@@ -2,20 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./app/store/store.js";
 
-const queryClient = new QueryClient();
 axios.defaults.baseURL = "https://extremes-dummy-server.onrender.com/";
+// ("http://localhost:3001/api");
 
-// "https://extremes-dummy-server.onrender.com/";
+//  import.meta.env.VITE_APP_API_URL;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
+  <Provider store={store}>
+    <BrowserRouter>
       {" "}
       <App />{" "}
-    </QueryClientProvider>{" "}
-  </BrowserRouter>
+    </BrowserRouter>
+  </Provider>
 );

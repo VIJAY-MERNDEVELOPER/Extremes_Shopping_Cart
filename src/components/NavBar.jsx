@@ -15,7 +15,14 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import "./styles/navbar.css";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Drawer, Grid } from "@mui/material";
+import {
+  Drawer,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 
 import { Link, NavLink } from "react-router-dom";
 import { fetchCart } from "../api/apiFetch";
@@ -79,7 +86,6 @@ function NavBar({ cart, setCart, open, setOpen, toggleDrawer }) {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ m: 0, pl: 0, left: 0, fontSize: "1.17em" }}
             onClick={toggleDrawer(true)}
           >
             <MenuIcon />

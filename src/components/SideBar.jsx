@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";

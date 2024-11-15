@@ -23,11 +23,11 @@ function LatestReleaseCard({ latest }) {
       // Check if at the end
       setTimeout(() => {
         const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-        console.log("left+width", Math.round(scrollLeft + clientWidth));
-        console.log("scrollwidth", scrollWidth);
+        // console.log("left+width", Math.round(scrollLeft + clientWidth));
+        // console.log("scrollwidth", scrollWidth);
         setIsAtEnd(Math.round(scrollLeft + clientWidth) === scrollWidth);
-        console.log(isAtEnd);
-      }, 300); // Adjust delay as needed
+        // console.log(isAtEnd);
+      }, 3000); // Adjust delay as needed
     }
 
     // console.log(categoryContainer.classList);
@@ -41,8 +41,8 @@ function LatestReleaseCard({ latest }) {
       setScrollPosition(scrollLeft);
       const endWidth = Math.round(scrollLeft + clientWidth);
       setIsAtEnd(endWidth === scrollWidth || endWidth + 1 === scrollWidth);
-      console.log("left+width", Math.round(scrollLeft + clientWidth));
-      console.log("scrollwidth", scrollWidth);
+      // console.log("left+width", Math.round(scrollLeft + clientWidth));
+      // console.log("scrollwidth", scrollWidth);
     };
     container.addEventListener("scroll", handleScroll);
 

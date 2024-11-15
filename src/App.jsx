@@ -17,7 +17,9 @@ import Dashboard from "./pages/Admin/Dashboard";
 import AddProducts from "./components/Admin/AddProducts";
 import ProductsOveriew from "./components/Admin/ProductsOveriew";
 import UserManagement from "./components/Admin/UserManagement";
+
 // import {} from "react-router";
+console.log(import.meta.env.VITE_APP_API_URL);
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -83,6 +85,7 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />}>
             <Route path="addproducts" element={<AddProducts />} />
             <Route path="productsoverview" element={<ProductsOveriew />} />
+
             <Route path="usermanagement" element={<UserManagement />} />
           </Route>
         </Routes>

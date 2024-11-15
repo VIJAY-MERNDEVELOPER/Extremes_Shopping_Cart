@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 function SideBarComponent({ data, toggleDrawer }) {
   return (
     <div
+      onClick={() => toggleDrawer(false)}
       className="row  align-items-center mt-3 "
       style={{
         boxShadow: "",
@@ -16,11 +17,7 @@ function SideBarComponent({ data, toggleDrawer }) {
     >
       {" "}
       <div className="col-8">
-        <Link
-          className="side-category"
-          to={`/products?category=${data.title}`}
-          onClick={() => toggleDrawer(false)}
-        >
+        <Link className="side-category" to={`/products?category=${data.title}`}>
           {data.category}
         </Link>
       </div>{" "}
