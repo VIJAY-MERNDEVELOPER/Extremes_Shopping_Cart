@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = "http://localhost:3001/api";
+const API = import.meta.env.VITE_APP_API_URL;
+// ("http://localhost:3001/api");
 
 export const addProduct = createAsyncThunk(
   "product/addproduct",
