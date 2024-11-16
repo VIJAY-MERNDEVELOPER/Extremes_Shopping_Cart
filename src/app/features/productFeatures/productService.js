@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = "https://extremes-b4pn.onrender.com/api";
+const API = "http://localhost:3001/api";
 
 export const addProduct = createAsyncThunk(
   "product/addproduct",

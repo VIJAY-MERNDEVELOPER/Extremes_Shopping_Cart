@@ -20,6 +20,7 @@ import UserManagement from "./components/Admin/UserManagement";
 
 // import {} from "react-router";
 console.log(import.meta.env.VITE_APP_API_URL);
+console.log(import.meta.env.MODE);
 
 function App() {
   const [cart, setCart] = useState([]);
