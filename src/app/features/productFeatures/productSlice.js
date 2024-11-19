@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProduct, getAllProducts } from "./productService.js";
+import { addProduct, deleteProduct, getAllProducts } from "./productService.js";
 
 const initialState = {
   product: [],
@@ -11,7 +11,11 @@ export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    productReset: (state) => {
+      state.product = [];
+      state.status = "idle";
+      state.message = "";
+    },
   },
   extraReducers(builder) {
     builder
@@ -39,9 +43,23 @@ export const productSlice = createSlice({
         state.status = "failed";
         state.message = action.payload;
         console.log(state.message);
+      })
+      .addCase(deleteProduct.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.status = "success";
+        state.message = action.payload.message;
+        console.log(state.product);
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.payload;
+        console.log(state.message);
       });
   },
 });
 
+export const { productReset } = productSlice.actions;
 export const productState = (state) => state.product;
 export default productSlice.reducer;

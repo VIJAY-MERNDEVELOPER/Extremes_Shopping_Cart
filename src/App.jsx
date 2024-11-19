@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import ForgetPassword from "./pages/ForgetPassword";
 import Dashboard from "./pages/Admin/Dashboard";
 import AddProducts from "./components/Admin/AddProducts";
-import ProductsOveriew from "./components/Admin/ProductsOveriew";
+import ProductsOveriew from "./pages/Admin/ProductsOveriew";
 import UserManagement from "./components/Admin/UserManagement";
 
 // import {} from "react-router";

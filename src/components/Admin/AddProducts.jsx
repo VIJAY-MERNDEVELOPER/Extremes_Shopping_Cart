@@ -5,7 +5,10 @@ import { Form } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../app/features/productFeatures/productService.js";
-import { productState } from "../../app/features/productFeatures/productSlice.js";
+import {
+  productReset,
+  productState,
+} from "../../app/features/productFeatures/productSlice.js";
 
 function AddProducts() {
   const dispatch = useDispatch();
@@ -61,7 +64,7 @@ function AddProducts() {
     formData.append("productDescription", data.productDescription);
     formData.append("category", data.category);
     formData.append("subCategory", data.subCategory);
-    formData.append("stocks", data.stocks);
+    formData.append("stocks", JSON.stringify(data.stocks));
     formData.append("discountPercentage", data.discountPercentage);
     formData.append("productPrice", data.productPrice);
     formData.append("color", data.color);
@@ -69,9 +72,7 @@ function AddProducts() {
     Array.from(watch_images_field).forEach((image, idx) => {
       formData.append("productImages", image);
     });
-
     dispatch(addProduct(formData));
-   
   };
 
   useEffect(() => {
