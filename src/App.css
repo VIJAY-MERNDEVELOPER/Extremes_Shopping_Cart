@@ -10,11 +10,9 @@
 }
 
 .main-content {
-  max-width: 100%;
-
   flex: 1;
 
-  max-height: calc(60%);
+  min-height: 60vh;
 
   padding: 0 !important;
   background-color: rgb(241, 243, 246);

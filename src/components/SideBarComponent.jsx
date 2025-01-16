@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function SideBarComponent({ data, toggleDrawer }) {
+function SideBarComponent({ filteredCategory, data, toggleDrawer }) {
   return (
     <div
       onClick={() => toggleDrawer(false)}
@@ -17,8 +17,11 @@ function SideBarComponent({ data, toggleDrawer }) {
     >
       {" "}
       <div className="col-8">
-        <Link className="side-category" to={`/products?category=${data.title}`}>
-          {data.category}
+        <Link
+          className="side-category"
+          to={`/products?category=${data.category}&sub=${data.subCategory}`}
+        >
+          {data.subCategory}
         </Link>
       </div>{" "}
       <div className="col-4 d-flex justify-content-center   ">

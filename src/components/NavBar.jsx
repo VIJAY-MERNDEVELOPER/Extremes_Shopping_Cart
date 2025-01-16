@@ -16,20 +16,26 @@ import "./styles/navbar.css";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
+  Avatar,
   Drawer,
   Grid,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  Tooltip,
 } from "@mui/material";
 
 import { Link, NavLink } from "react-router-dom";
 import { fetchCart } from "../api/apiFetch";
 import SideBar from "./SideBar";
+import { useGetCartProductsQuery } from "../app/features/cartFeatures/cartApiSlice";
 // import SideBar from "../../../SERVER/SideBar";
 
-function NavBar({ cart, setCart, open, setOpen, toggleDrawer }) {
+const user = JSON.parse(localStorage.getItem("user"));
+
+function NavBar({ open, setOpen, toggleDrawer }) {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [anchorEl, setAnchorEl] = useState(null);
 
   // const [open, setOpen] = useState(false);
@@ -38,6 +44,23 @@ function NavBar({ cart, setCart, open, setOpen, toggleDrawer }) {
   //   setOpen(newOpen);
   // };
 
+  const {
+    data: newData,
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+  } = useGetCartProductsQuery();
+  const { cart: cartItem, message, totalCartItem } = newData || {};
+  console.log(cartItem);
+
+  // const totalItemsInCart = cartItem?.reduce(
+  //   (sum, item) => sum + item.quantity,
+  //   0
+  // );
+  // console.log(totalItemsInCart);
+
+  // console.log(totalItemsInCart);
   const isMenuOpen = Boolean(anchorEl);
 
   const handleProfileMenuOpen = (event) => {
@@ -71,7 +94,7 @@ function NavBar({ cart, setCart, open, setOpen, toggleDrawer }) {
   );
 
   useEffect(() => {
-    fetchCart(setCart);
+    // fetchCart(setCart);
   }, []);
   return (
     <Box
@@ -118,7 +141,7 @@ function NavBar({ cart, setCart, open, setOpen, toggleDrawer }) {
               sx={{ display: { fontSize: "1.17em" } }}
             >
               <Link to={"/cart"}>
-                <Badge badgeContent={cart.length} color="error">
+                <Badge badgeContent={totalCartItem} color="error">
                   <ShoppingCartIcon style={{ color: "rgb(255,255,255)" }} />
                 </Badge>
               </Link>
@@ -147,12 +170,38 @@ function NavBar({ cart, setCart, open, setOpen, toggleDrawer }) {
               },
             }}
           >
-            <NavLink
+            {user ? (
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={() => {
+                  localStorage.removeItem("user");
+                }}
+                className="nav-icon"
+                sx={{ display: { fontSize: "1.17em" } }}
+              >
+                <span style={{ textDecoration: "none", color: "white" }}>
+                  LogOut
+                </span>
+              </IconButton>
+            ) : (
+              <NavLink
+                to={"/login"}
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Login
+              </NavLink>
+            )}
+
+            {/* <NavLink
               to={"/login"}
               style={{ textDecoration: "none", color: "white" }}
             >
               Login
-            </NavLink>
+            </NavLink> */}
           </Typography>
         </Toolbar>
       </AppBar>

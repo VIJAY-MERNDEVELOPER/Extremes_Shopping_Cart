@@ -5,7 +5,7 @@ import { Outlet, Route, Routes } from "react-router-dom";
 
 function Dashboard() {
   return (
-    <div className="container-fluid" style={{ height: "100%" }}>
+    <div className="container-fluid" style={{ maxHeight: "60%" }}>
       <div className="row">
         <div
           className="col-6 col-md-3 col-xl-2"

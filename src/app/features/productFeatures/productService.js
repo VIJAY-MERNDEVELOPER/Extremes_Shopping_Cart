@@ -20,7 +20,7 @@ export const addProduct = createAsyncThunk(
       console.log("product service", product);
       console.log(response);
       if (response.status === 201) {
-        return response.data;
+        return response.data.product;
       }
     } catch (error) {
       console.log(error);
@@ -33,7 +33,6 @@ export const updateProduct = createAsyncThunk(
   "product/updateProduct",
   async (product, thunkApi) => {
     try {
-      console.log(product);
       const response = await axios.put(
         `${API}/products/editproduct/${product.productId}`,
         product.updateData,
@@ -62,6 +61,7 @@ export const getAllProducts = createAsyncThunk(
         withCredentials: true,
       });
       if (response.status === 200) {
+        console.log(response.data);
         return response.data;
       }
     } catch (error) {

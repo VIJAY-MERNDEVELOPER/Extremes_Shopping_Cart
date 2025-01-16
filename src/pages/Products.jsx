@@ -1,41 +1,60 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router";
+import React, { useEffect, useMemo, useRef } from "react";
+
 import { fetchProductData } from "../api/apiFetch.js";
 import ProductCard from "../components/ProductCard";
+import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
+import { useGetProductsByCategoryQuery } from "../app/features/productFeatures/productApiSlice.js";
 
-function Products({ products, setProducts, toggleDrawer }) {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const category = searchParams
-    .get("category")
-    .split("-")
-    .join(" ")
-    .toUpperCase();
-  const price = searchParams.get("price");
-  const filterValue = searchParams.get("value");
-  console.log(price);
-  console.log(category);
-  console.log(filterValue);
+function Products({ toggleDrawer }) {
+  const [searchParams] = useSearchParams();
+  // console.log(search.get("category"));
+  // const location = useLocation();
+  // const searchParams = new URLSearchParams(location.search);
+  // console.log(searchParams.get("category"));
 
+  const category = searchParams.get("category");
+
+  const subCategory = encodeURIComponent(searchParams.get("sub"));
+  const sortName = searchParams.get("sort");
+  const sortValue = searchParams.get("value");
+
+  const {
+    data: newData,
+    isLoading,
+    isSuccess,
+    isFetching,
+    isError,
+    error,
+    refetch,
+  } = useGetProductsByCategoryQuery({
+    category,
+    subCategory,
+    sortName,
+    sortValue,
+  });
+
+  console.log(newData);
+  const { products = [] } = newData || {};
   const scrollerRef = useRef();
 
   const navigate = useNavigate();
   const handleFilter = (e) => {
-    const values = e.target.value.split(",");
+    const [sortName, sortValue] = e.target.value.split(",");
 
     navigate(
-      `/products?category=${category}&sort=${values[0]}&value=${values[1]}`
+      `?category=${category}&sub=${subCategory}&sort=${sortName}&value=${sortValue}`
     );
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchProductData(setProducts);
+
     toggleDrawer(false);
+    refetch();
     // scrollerRef.scrollTo(0, 0);
     // console.log(products);
-  }, [location]);
+  }, [category, subCategory, sortName, sortValue]);
 
   return (
     <div className="container " ref={scrollerRef} style={{ maxHeight: "100%" }}>
@@ -54,9 +73,10 @@ function Products({ products, setProducts, toggleDrawer }) {
             style={{ borderRadius: 0 }}
             onChange={(e) => handleFilter(e)}
           >
-            <option value="price,asce">Price Low to High</option>
-            <option value="price,desc">Price High to Low</option>
-            <option value="date,asce">Newest First</option>
+            {" "}
+            <option value="createdAt,desc">Newest First</option>
+            <option value="productPrice,asce">Price Low to High</option>
+            <option value="productPrice,desc">Price High to Low</option>
           </select>
         </div>
       </div>

@@ -15,6 +15,7 @@
   background-color: white;
   position: sticky;
   bottom: 0;
+
   /* display: none; */
   @media (max-width: 1025px) {
     /* display: none; */

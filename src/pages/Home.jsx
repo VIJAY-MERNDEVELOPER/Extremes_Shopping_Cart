@@ -14,14 +14,22 @@ import {
   fetchProductData,
   fetchVideos,
 } from "../api/apiFetch";
+import { useGetCartProductsQuery } from "../app/features/cartFeatures/cartApiSlice";
 
 function Home({ products, setProducts }) {
   const [latest, setLatest] = useState();
   const [categories, setCategories] = useState();
   const [instaVideos, setInstaVideos] = useState();
 
+  // const {
+  //   data: { cart, message },
+  //   isLoading,
+  //   isError,
+  //   isSuccess,
+  //   error,
+  // } = useGetCartProductsQuery();
+
   useEffect(() => {
-    fetchProductData(setProducts);
     fetchLatestRelease(setLatest);
     fetchVideos(setInstaVideos);
     fetchCategory(setCategories);
@@ -60,11 +68,8 @@ function Home({ products, setProducts }) {
           />
         </picture>
         {/* Latest Releases Products section*/}
-        {products ? (
-          <LatestReleasesProducts products={products} />
-        ) : (
-          <CircularProgress color="inherit" />
-        )}
+
+        <LatestReleasesProducts />
 
         {/* Category card section */}
 

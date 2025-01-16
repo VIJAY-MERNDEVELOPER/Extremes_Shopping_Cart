@@ -8,7 +8,7 @@ function CheckOutButton() {
         // backgroundColor: "grey",
         position: "sticky",
         bottom: 0,
-        width: "100%",
+
         height: 60,
         // marginLeft: 0,
         // margin: 0,

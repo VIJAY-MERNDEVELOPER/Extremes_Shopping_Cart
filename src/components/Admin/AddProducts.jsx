@@ -3,15 +3,14 @@ import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import "./addproducts.css";
 import { Form } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../app/features/productFeatures/productService.js";
-import {
-  productReset,
-  productState,
-} from "../../app/features/productFeatures/productSlice.js";
+
+import { useAddProductMutation } from "../../app/features/productFeatures/productApiSlice.js";
 
 function AddProducts() {
-  const dispatch = useDispatch();
+  const [addproduct, { isLoading, isError, isSuccess, data, error }] =
+    useAddProductMutation();
+
+  // const dispatch = useDispatch();
 
   const form = useForm({
     defaultValues: {
@@ -56,8 +55,6 @@ function AddProducts() {
 
   const watch_images_field = watch("productImages");
 
-  const { product, status, message } = useSelector(productState);
-
   const handleAddProduct = (data) => {
     formData.append("productName", data.productName);
     formData.append("productBrand", data.productBrand);
@@ -72,17 +69,18 @@ function AddProducts() {
     Array.from(watch_images_field).forEach((image, idx) => {
       formData.append("productImages", image);
     });
-    dispatch(addProduct(formData));
+    // dispatch(addProduct(formData));
+    addproduct(formData);
   };
 
   useEffect(() => {
-    if (status === "success") {
+    if (isSuccess) {
       reset();
     }
-    if (status === "failed") {
+    if (isError) {
       formData.delete("productImages");
     }
-  }, [product, status]);
+  }, [isSuccess, isError]);
 
   return (
     <div className="container" style={{ maxWidth: "100vw" }}>
@@ -119,7 +117,7 @@ function AddProducts() {
                   />
                 </label>
               </div>
-              <p className="opacity-75 fw-bold text-secondary">
+              <p className="opacity-75 fw-bold text-secondary custom-text">
                 PNG, JPG, GIF up to 10MB
               </p>
             </div>
@@ -170,7 +168,7 @@ function AddProducts() {
                 required: { value: true, message: "Product Name is required" },
               })}
             />{" "}
-            <p>{errors.productName?.message}</p>
+            <p className="custom-text">{errors.productName?.message}</p>
           </div>{" "}
           <div className="col-6">
             <label htmlFor="brandName">
@@ -185,7 +183,7 @@ function AddProducts() {
                 required: { value: true, message: "Brand Name is required" },
               })}
             />{" "}
-            <p>{errors.productBrand?.message}</p>
+            <p className="custom-text">{errors.productBrand?.message}</p>
           </div>{" "}
         </div>
         <div className="row my-4">
@@ -202,7 +200,7 @@ function AddProducts() {
                       className="form-check-input"
                       type="radio"
                       id="category1"
-                      value="men"
+                      value="Men"
                       {...register("category")}
                     />{" "}
                     Men
@@ -214,7 +212,7 @@ function AddProducts() {
                       className="form-check-input"
                       type="radio"
                       id="category2"
-                      value="women"
+                      value="Women"
                       {...register("category", {
                         required: {
                           value: true,
@@ -284,7 +282,7 @@ function AddProducts() {
                 },
               })}
             />{" "}
-            <p>{errors.productDescription?.message}</p>
+            <p className="custom-text">{errors.productDescription?.message}</p>
           </div>
         </div>
         <div className="row my-4">
@@ -305,7 +303,7 @@ function AddProducts() {
                 },
               })}
             />{" "}
-            <p>{errors.productPrice?.message}</p>
+            <p className="custom-text">{errors.productPrice?.message}</p>
           </div>
           <div className="col-4">
             {" "}
@@ -324,7 +322,7 @@ function AddProducts() {
                 },
               })}
             />{" "}
-            <p>{errors.discountPercentage?.message}</p>
+            <p className="custom-text">{errors.discountPercentage?.message}</p>
           </div>
         </div>
         <div className="row gap-1 my-4">
@@ -345,7 +343,7 @@ function AddProducts() {
                 },
               })}
             />{" "}
-            <p>{errors.stocks?.total?.message}</p>
+            <p className="custom-text">{errors.stocks?.total?.message}</p>
           </div>{" "}
           <div className="col-md-2 col-5 ">
             <label htmlFor="ssize"> S</label>
@@ -363,7 +361,7 @@ function AddProducts() {
               })}
               onBlur={handleTotalStock}
             />{" "}
-            <p>{errors.stocks?.S?.message}</p>
+            <p className="custom-text">{errors.stocks?.S?.message}</p>
           </div>{" "}
           <div className="col-md-2 col-5 ">
             <label htmlFor="msize"> M</label>
@@ -381,7 +379,7 @@ function AddProducts() {
               })}
               onBlur={handleTotalStock}
             />{" "}
-            <p>{errors.stocks?.M?.message}</p>
+            <p className="custom-text">{errors.stocks?.M?.message}</p>
           </div>{" "}
           <div className="col-md-2 col-5">
             <label htmlFor="lsize">L</label>
@@ -399,7 +397,7 @@ function AddProducts() {
               })}
               onBlur={handleTotalStock}
             />{" "}
-            <p>{errors.stocks?.L?.message}</p>
+            <p className="custom-text">{errors.stocks?.L?.message}</p>
           </div>{" "}
           <div className="col-md-2 col-5">
             <label htmlFor="xlsize"> XL</label>
@@ -417,7 +415,7 @@ function AddProducts() {
               })}
               onBlur={handleTotalStock}
             />{" "}
-            <p>{errors.stocks?.XL?.message}</p>
+            <p className="custom-text">{errors.stocks?.XL?.message}</p>
           </div>
           {/* <div className="col-1 ">
             <label htmlFor="xxlsize"> XXL</label>
@@ -462,7 +460,7 @@ function AddProducts() {
         </div>
         <div className="row justify-content-center">
           <button className="btn btn-success  col-3" type="submit">
-            Add Product
+            {isLoading ? <span>...Adding</span> : <span>Add Product</span>}
           </button>
         </div>
       </form>

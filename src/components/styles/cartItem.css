@@ -1,0 +1,10 @@
+.custom-input::-webkit-outer-spin-button,
+.custom-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  cursor: text !important;
+}
+
+.btn-style {
+  border: none;
+}

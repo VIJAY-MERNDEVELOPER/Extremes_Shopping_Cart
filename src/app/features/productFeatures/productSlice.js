@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addProduct, deleteProduct, getAllProducts } from "./productService.js";
+import {
+  addProduct,
+  deleteProduct,
+  getAllProducts,
+  updateProduct,
+} from "./productService.js";
 
 const initialState = {
   product: [],
@@ -25,6 +30,7 @@ export const productSlice = createSlice({
       .addCase(addProduct.fulfilled, (state, action) => {
         state.status = "success";
         state.message = action.payload.message;
+        state.product.push(action.payload);
       })
       .addCase(addProduct.rejected, (state, action) => {
         state.status = "failed";
@@ -44,13 +50,32 @@ export const productSlice = createSlice({
         state.message = action.payload;
         console.log(state.message);
       })
+      .addCase(updateProduct.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.status = "success";
+        const { message, product } = action.payload;
+        state.message = message;
+        const index = state.product.findIndex(
+          (prod) => prod._id === product._id
+        );
+        index !== -1 && (state.product[index] = action.payload.product);
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.payload;
+        console.log(state.message);
+      })
       .addCase(deleteProduct.pending, (state, action) => {
         state.status = "loading";
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.status = "success";
         state.message = action.payload.message;
-        console.log(state.product);
+        state.product = state.product.filter(
+          (prod) => prod._id !== action.payload.id
+        );
       })
       .addCase(deleteProduct.rejected, (state, action) => {
         state.status = "failed";

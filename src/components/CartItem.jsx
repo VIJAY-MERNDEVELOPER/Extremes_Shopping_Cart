@@ -2,10 +2,35 @@
 
 import { useEffect, useState } from "react";
 import { fetchProductData } from "../api/apiFetch";
+import { useGetProductQuery } from "../app/features/productFeatures/productApiSlice";
+import { discountedPrice } from "../utils/utils";
+import {
+  useDeleteCartProductMutation,
+  useUpdateCartQuantityMutation,
+} from "../app/features/cartFeatures/cartApiSlice";
+import "./styles/cartItem.css";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
-function CartItem({ cart, setCart, products, setProducts }) {
-  console.log(cart);
-  console.log(products);
+function CartItem({ cart }) {
+  const { _id: cartId } = cart;
+
+  const { data: product, refetch } = useGetProductQuery(cart.productId);
+
+  const [cartQuantity, setCartQuantity] = useState();
+
+  const [deleteCartProduct] = useDeleteCartProductMutation();
+  const [updateCartQuantity, { isSuccess, isError }] =
+    useUpdateCartQuantityMutation();
+
+  const handleUpdate = async (e) => {
+    setCartQuantity(e.target.value);
+    console.log(e.target.value);
+    await updateCartQuantity({ cartId, quantity: e.target.value });
+  };
+
+  // const {data}
+
   // const [deliveryDate, setDeliveryDate] = useState();
 
   // const getDeliveryDate = (deliveryDays) => {
@@ -17,18 +42,19 @@ function CartItem({ cart, setCart, products, setProducts }) {
   //   console.log(deliveryDate);
   // };
 
-  const product = products?.filter((item) => item.id === cart.product_id);
+  // const product = products?.filter((item) => item.id === cart.product_id);
   // const price = product[0].price * cart.cart_quantity;
 
   // console.log(product);
   useEffect(() => {
-    fetchProductData(setProducts);
+    setCartQuantity(cart.quantity);
+
     // getDeliveryDate(product[0]?.deliveryBy);
-  }, []);
+  }, [cart]);
 
   return (
     <>
-      {!product[0] ? (
+      {!product ? (
         <span className="row justify-content-center align-items-center">
           ... Product Loading
         </span>
@@ -51,21 +77,23 @@ function CartItem({ cart, setCart, products, setProducts }) {
                   className="me-3"
                 />{" "}
                 <img
-                  src={product[0]?.product_image_1}
-                  alt={product[0]?.product_name}
+                  src={`http://localhost:3001/${product?.productImages[0].filename}`}
+                  alt={product?.productName}
                   width={"100"}
                   height={"100%"}
+                  className="img-fluid"
                 />
               </div>
               <div className="col-7" style={{ padding: 0, margin: 0 }}>
                 <span>
-                  <img
+                  <h3>{product.productBrand}</h3>
+                  {/* <img
                     src={product[0]?.brand_logo}
                     alt={product[0]?.product_brand}
                     width={"60px"}
-                  />
+                  /> */}
                 </span>
-                <p style={{ margin: 5 }}>{product[0]?.product_name}</p>{" "}
+                <p style={{ margin: 5 }}>{product.productName}</p>{" "}
                 <div className="row">
                   <div className="col-3">
                     <span style={{ margin: 5 }}>In Stock</span>
@@ -84,7 +112,7 @@ function CartItem({ cart, setCart, products, setProducts }) {
                 </div>
                 <p style={{ margin: 5 }}>
                   <span>
-                    <b>Size:</b> M
+                    <b>Size:</b> {cart.size}
                   </span>
                 </p>
               </div>
@@ -100,7 +128,7 @@ function CartItem({ cart, setCart, products, setProducts }) {
                       fontWeight: "bold",
                     }}
                   >
-                    ₹{product[0]?.product_price}{" "}
+                    ₹{product.productPrice}{" "}
                   </span>
                   <span
                     style={{
@@ -108,34 +136,88 @@ function CartItem({ cart, setCart, products, setProducts }) {
                       fontWeight: "bold",
                     }}
                   >
-                    ₹{product[0]?.product_price}
+                    ₹
+                    {discountedPrice(
+                      product.productPrice,
+                      product.discountPercentage
+                    )}
                   </span>
                 </div>
               </div>
             </div>{" "}
             <div className="row align-items-center">
-              <div className="col-2 ms-5">
+              <div className="col-3 mt-2">
+                <div className="d-flex justify-content-center gap-1">
+                  <button
+                    className=" rounded-circle btn-style border "
+                    onClick={() => {
+                      cartQuantity !== 0 && setCartQuantity((prev) => --prev);
+                      updateCartQuantity({
+                        cartId,
+                        quantity: cartQuantity - 1,
+                      });
+                    }}
+                  >
+                    <RemoveIcon />
+                  </button>
+                  <input
+                    type="number"
+                    min={0}
+                    max={product?.stocks[cart?.quantity]}
+                    className=" form-control-color custom-input text-center border border-2 fw-medium"
+                    id="exampleColorInput"
+                    value={cartQuantity}
+                    onChange={(e) => {
+                      handleUpdate(e);
+                    }}
+                  />{" "}
+                  <button
+                    className=" rounded-circle btn-style text-center border"
+                    onClick={() => {
+                      setCartQuantity((prev) => ++prev);
+                      updateCartQuantity({
+                        cartId,
+                        quantity: cartQuantity + 1,
+                      });
+                    }}
+                  >
+                    <AddIcon />
+                  </button>
+                </div>
+              </div>
+              {/* <div className="col-2 ms-5">
                 <label htmlFor="quantitySelector">
                   <b>Qty:</b>
                 </label>
-                <select
-                  defaultValue={cart?.cart_quantity}
-                  name="quantity"
-                  id="quantitySelector"
-                  style={{ width: "40px", borderRadius: 5, marginLeft: 10 }}
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </div>
+                {
+                  <select
+                    defaultValue={cart?.quantity}
+                    name="quantity"
+                    id="quantitySelector"
+                    style={{ width: "40px", borderRadius: 5, marginLeft: 10 }}
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                }
+              </div> */}
               <div className="col-3 ms-1">
-                <button className="btn ">Delete</button>
+                <button
+                  className="btn "
+                  onClick={() => deleteCartProduct(cart._id)}
+                >
+                  Delete
+                </button>
               </div>
               <div className="col-5 text-end mx-2">
-                ₹ {product[0]?.product_price * cart?.cart_quantity}
+                ₹{" "}
+                {discountedPrice(
+                  product.productPrice,
+                  product.discountPercentage
+                ) * cart?.quantity}
               </div>
             </div>
           </div>{" "}

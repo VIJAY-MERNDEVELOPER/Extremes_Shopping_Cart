@@ -1,20 +1,22 @@
 import React from "react";
 import CheckOutButton from "./CheckOutButton";
 import { Divider } from "@mui/material";
+import { useGetCartProductsQuery } from "../app/features/cartFeatures/cartApiSlice";
+import { Table } from "react-bootstrap";
 
-function PriceDetailComponent() {
+function PriceDetailComponent({ totalCartItem, totalPrice, totalDiscount }) {
   return (
-    <>
+    <div className="container">
       <div
         className="row  "
         style={{
           border: "1px solid rgba(210,210,210,0.6)",
-          width: "100%",
+
           backgroundColor: "white",
         }}
       >
         <div
-          className="col-12"
+          className="col-md-12"
           style={{
             borderBottom: "1px solid rgba(210,210,210,0.6)",
           }}
@@ -25,10 +27,10 @@ function PriceDetailComponent() {
         <div className="row gap-2">
           <div className="row">
             <div className="col-8">
-              <span>Price (12 items)</span>
+              <span>Price ({totalCartItem} items)</span>
             </div>
             <div className="col-4 text-end">
-              <span>₹ 2000</span>
+              <span>₹ {totalPrice}</span>
             </div>
           </div>
           <div className="row">
@@ -37,7 +39,7 @@ function PriceDetailComponent() {
               <span>Discount</span>
             </div>
             <div className="col-4 text-end">
-              <span> -₹2000</span>
+              <span> -₹{totalDiscount}</span>
             </div>
           </div>
           <div className="row">
@@ -69,14 +71,14 @@ function PriceDetailComponent() {
             </div>
             <div className="col-4 text-end">
               <span>
-                <b>₹ 2000</b>
+                <b>₹ {totalPrice - totalDiscount + 59}</b>
               </span>
             </div>
           </div>
         </div>
       </div>
-      <CheckOutButton />
-    </>
+      {/* <CheckOutButton /> */}
+    </div>
   );
 }
 

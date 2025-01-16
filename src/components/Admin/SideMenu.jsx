@@ -19,8 +19,32 @@ function SideMenu() {
         <li className="list-group-item  py-3 fs-6 fw-medium">
           <div className="row align-center">
             <div className="col-12 col-lg-12 d-flex ">
-              <Link to={"productsoverview"} className="route-link mt-1">
+              <Link to={"addproducts"} className="route-link mt-1">
+                Category Management
+              </Link>
+            </div>
+          </div>
+        </li>{" "}
+        <li className="list-group-item  py-3 fs-6 fw-medium">
+          <div className="row align-center">
+            <div className="col-12 col-lg-12 d-flex ">
+              <Link
+                to={`productsoverview?page=1&limit=5`}
+                className="route-link mt-1"
+              >
                 Products View
+              </Link>
+            </div>
+          </div>
+        </li>{" "}
+        <li className="list-group-item  py-3 fs-6 fw-medium">
+          <div className="row align-center">
+            <div className="col-12 col-lg-12 d-flex ">
+              <Link
+                to={`productsoverview?page=1&limit=5`}
+                className="route-link mt-1"
+              >
+                Order Management
               </Link>
             </div>
           </div>

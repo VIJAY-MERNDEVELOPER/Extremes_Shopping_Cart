@@ -6,8 +6,16 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardContent, Grid, Typography } from "@mui/material";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import "./styles/ProductCard.css";
+import { useAddToCartMutation } from "../app/features/cartFeatures/cartApiSlice";
 
 function ProductCard({ product }) {
+  const [addToCart, { isLoading, isError, isSuccess, data, error }] =
+    useAddToCartMutation();
+
+  const handleAddProduct = (productId, size, quantity) => {
+    addToCart({ productId, size, quantity });
+  };
+
   return (
     <Card
       sx={{
@@ -19,11 +27,11 @@ function ProductCard({ product }) {
       }}
       className="card"
     >
-      <Link to={`/product/${product.id}`} className="card-link">
+      <Link to={`/product/${product._id}`} className="card-link">
         <CardMedia
           sx={{ height: 300, width: "100%", padding: 0, objectFit: "cover" }}
-          image={product.product_image_1}
-          title={product.product_name}
+          image={`http://localhost:3001/${product?.productImages[0].filename}`}
+          title={`extremes_${product._id}`}
           className="card-image"
         >
           {" "}
@@ -33,9 +41,6 @@ function ProductCard({ product }) {
           {/* <button className="add-to-cart-btn">Add To Cart</button> */}
         </CardMedia>
         <CardContent>
-          <Grid display="flex" justifyContent="center" alignItems="center">
-            <img src={product.brand_logo} alt="NIKE" width={"75px"} />
-          </Grid>
           <Typography
             variant="span"
             color="text.secondary"
@@ -43,11 +48,20 @@ function ProductCard({ product }) {
             fontWeight={"bold"}
             textAlign={"center"}
           >
-            <Grid>{product.product_name}</Grid>
+            <Grid>{product.productBrand}</Grid>
+          </Typography>
+          <Typography
+            variant="span"
+            color="text.secondary"
+            fontSize={12}
+            fontWeight={"bold"}
+            textAlign={"center"}
+          >
+            <Grid>{product.productName}</Grid>
           </Typography>{" "}
           <Typography fontSize={15} fontWeight={"bold"} textAlign={"center"}>
             <Grid>
-              <span> ₹{product.product_price}</span>
+              <span> ₹{product.productPrice}</span>
             </Grid>
           </Typography>
         </CardContent>
@@ -57,7 +71,13 @@ function ProductCard({ product }) {
         justifyContent={"center"}
         style={{ paddingBottom: 5 }}
       >
-        <button className="add-to-cart-btn"> Add To Cart</button>
+        <button
+          className="add-to-cart-btn"
+          onClick={() => handleAddProduct(product._id, "S", 1)}
+        >
+          {" "}
+          Add To Cart
+        </button>
       </Grid>
     </Card>
   );

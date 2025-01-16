@@ -14,30 +14,30 @@ import "./styles/sidebar.css";
 function SideBar({ toggleDrawer }) {
   const sideBarData = [
     {
-      category: "new arrivals",
+      subCategory: "New Arrivals",
       image:
         "https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/p/c/g/m-t5-lvd-hikaru-original-imah3572ky5grg4p.jpeg?q=70",
-      collections: "men",
+      category: "Men",
       title: "men's new arrivals",
     },
     {
-      category: "trending now",
+      subCategory: "Trending Now",
       image: "/xxl-pct09201001-polo-plus-original-imafuvp5zyzpfn97 (1).webp",
-      collections: "men",
-      title: "trending now",
+      category: "Men",
+      title: "Trending Now",
     },
     {
-      category: "new arrivals",
+      subCategory: "New Arrivals",
       image:
         "https://rukminim2.flixcart.com/image/612/612/kxnl6kw0/t-shirt/w/4/2/s-bi-women-v-neck-105-black-bi-fashion-original-imaga2d8sn286uqk.jpeg?q=70",
-      collections: "women",
+      category: "Women",
       title: "wommen's new arrivals",
     },
     {
-      category: "trending now",
+      subCategory: "Trending Now",
       image:
         "https://rukminim2.flixcart.com/image/612/612/kwgpz0w0/t-shirt/l/5/l/xxl-womens-style-001-youthpoi-original-imag94zrzerxrzyn.jpeg?q=70",
-      collections: "women",
+      category: "Women",
       title: "trending now",
     },
   ];
@@ -75,13 +75,11 @@ function SideBar({ toggleDrawer }) {
 
   const [filteredCategory, setFilteredCategory] = useState();
   const handleCategoryType = (type) => {
-    setFilteredCategory(
-      sideBarData.filter((data) => data.collections === type)
-    );
+    setFilteredCategory(sideBarData.filter((data) => data.category === type));
   };
 
   useEffect(() => {
-    handleCategoryType("men");
+    handleCategoryType("Men");
   }, []);
 
   return (
@@ -92,14 +90,14 @@ function SideBar({ toggleDrawer }) {
       >
         <button
           className="col-6 text-center"
-          onClick={() => handleCategoryType("men")}
+          onClick={() => handleCategoryType("Men")}
           aria-selected="true"
         >
           MEN
         </button>
         <button
           className="col-6 text-center"
-          onClick={() => handleCategoryType("women")}
+          onClick={() => handleCategoryType("Women")}
         >
           {" "}
           WOMEN

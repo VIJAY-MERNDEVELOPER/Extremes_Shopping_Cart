@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import NavBar from "./components/NavBar";
 
-import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import Cart from "./pages/Cart";
@@ -17,6 +16,9 @@ import Dashboard from "./pages/Admin/Dashboard";
 import AddProducts from "./components/Admin/AddProducts";
 import ProductsOveriew from "./pages/Admin/ProductsOveriew";
 import UserManagement from "./components/Admin/UserManagement";
+import { Route, Routes } from "react-router-dom";
+import CheckOut from "./pages/CheckOut";
+import OrderSummary from "./pages/OrderSummary";
 
 // import {} from "react-router";
 console.log(import.meta.env.VITE_APP_API_URL);
@@ -41,51 +43,30 @@ function App() {
       style={{ margin: 0, backgroundColor: "rgb(241, 243, 246)" }}
     >
       <div className="App  " style={{ position: "sticky", top: 0, zIndex: 1 }}>
-        <NavBar
-          cart={cart}
-          setCart={setCart}
-          setProducts={setProducts}
-          open={open}
-          setOpen={setOpen}
-          toggleDrawer={toggleDrawer}
-        />
+        <NavBar open={open} setOpen={setOpen} toggleDrawer={toggleDrawer} />
       </div>
 
       <div className="main-content">
         <Routes>
-          <Route
-            path="/"
-            element={<Home products={products} setProducts={setProducts} />}
-          />
-
-          <Route
-            path="/cart"
-            element={
-              <Cart
-                cart={cart}
-                setCart={setCart}
-                products={products}
-                // heightValue={heightValue}
-              />
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout/:orderId" element={<CheckOut />} />{" "}
+          <Route path="/order-success/:orderId" element={<OrderSummary />} />
           <Route path="/product/:id" element={<Product />} />
           <Route
             path="/products"
-            element={
-              <Products
-                products={products}
-                setProducts={setProducts}
-                toggleDrawer={toggleDrawer}
-              />
-            }
+            element={<Products toggleDrawer={toggleDrawer} />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/admin/dashboard" element={<Dashboard />}>
             <Route path="addproducts" element={<AddProducts />} />
-            <Route path="productsoverview" element={<ProductsOveriew />} />
+            <Route
+              index
+              path="productsoverview"
+              element={<ProductsOveriew />}
+            />
 
             <Route path="usermanagement" element={<UserManagement />} />
           </Route>

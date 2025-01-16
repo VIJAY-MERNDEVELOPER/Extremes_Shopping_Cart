@@ -2,8 +2,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import DividerComponent from "./DividerComponent";
 import ProductCard from "./ProductCard";
+import {
+  useGetProductsPaginationQuery,
+  useGetProductsQuery,
+} from "../app/features/productFeatures/productApiSlice";
 
-function LatestReleasesProducts({ products }) {
+function LatestReleasesProducts() {
+  const {
+    data: newData,
+    isLoading,
+    isSuccess,
+    isFetching,
+    isError,
+    error,
+  } = useGetProductsQuery();
+  console.log(newData);
+  const { products = [], totalProducts = 1 } = newData || {};
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const containerRef = useRef(null);
@@ -43,9 +57,9 @@ function LatestReleasesProducts({ products }) {
     };
     container.addEventListener("scroll", handleScroll);
 
-    return () => {
-      container.removeEventListener("scroll", handleScroll);
-    };
+    // return () => {
+    //   container.removeEventListener("scroll", handleScroll);
+    // };
   }, []);
 
   return (
@@ -70,13 +84,13 @@ function LatestReleasesProducts({ products }) {
           }}
         >
           {" "}
-          {products?.map((product, idx) => {
+          {products?.map((product) => {
             return (
               <div
                 className="col-8 col-sm-3  col-md-4 col-lg-3 col-xl-3 col-xxl-2  "
-                key={idx}
+                key={product._id}
               >
-                <ProductCard key={idx} product={product} />
+                <ProductCard key={product._id} product={product} />
               </div>
             );
           })}
